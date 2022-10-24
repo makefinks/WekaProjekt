@@ -33,4 +33,13 @@ public class DataObject {
     public void setGroupId(int groupId) {
         this.groupId = groupId;
     }
+
+    @Override
+    public String toString() {
+        return "DataObject{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", groupId=" + groupId +
+                '}';
+    }
 }
