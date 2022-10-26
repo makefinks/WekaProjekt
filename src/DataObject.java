@@ -4,7 +4,7 @@ public class DataObject {
     private String text;
     private int groupId;
 
-    //possible new Attributes -> see Attribute Ideas
+    //possible new Attributes -> see Attribute Ideas    
 
     public DataObject(int id, String text, int groupId) {
         this.id = id;
