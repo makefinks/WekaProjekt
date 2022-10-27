@@ -4,7 +4,15 @@ public class DataObject {
     private String text;
     private int groupId;
 
-    //possible new Attributes -> see Attribute Ideas    
+    private int AtheismCount;
+
+    private int GraphicsCount;
+
+    private int ReligionCount;
+
+    private int SpaceCount;
+
+    //possible new Attributes -> see Attribute Ideas
 
     public DataObject(int id, String text, int groupId) {
         this.id = id;
@@ -36,12 +44,48 @@ public class DataObject {
         this.groupId = groupId;
     }
 
+    public int getAtheismCount() {
+        return AtheismCount;
+    }
+
+    public void setAtheismCount(int atheismCount) {
+        AtheismCount = atheismCount;
+    }
+
+    public int getGraphicsCount() {
+        return GraphicsCount;
+    }
+
+    public void setGraphicsCount(int graphicsCount) {
+        GraphicsCount = graphicsCount;
+    }
+
+    public int getReligionCount() {
+        return ReligionCount;
+    }
+
+    public void setReligionCount(int religionCount) {
+        ReligionCount = religionCount;
+    }
+
+    public int getSpaceCount() {
+        return SpaceCount;
+    }
+
+    public void setSpaceCount(int spaceCount) {
+        SpaceCount = spaceCount;
+    }
+
     @Override
     public String toString() {
         return "DataObject{" +
                 "id=" + id +
                 ", text='" + text + '\'' +
                 ", groupId=" + groupId +
+                ", AtheismCount=" + AtheismCount +
+                ", GraphicsCount=" + GraphicsCount +
+                ", ReligionCount=" + ReligionCount +
+                ", SpaceCount=" + SpaceCount +
                 '}';
     }
 }
