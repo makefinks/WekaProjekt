@@ -47,6 +47,11 @@ public class DeleteTest {
 
         System.out.println(wordLists);
 
+        String text = "Hallo wie Earthorbit.";
+
+        System.out.println(text.contains("orbit"));
+
+
 
     }
 

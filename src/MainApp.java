@@ -118,8 +118,15 @@ public class MainApp {
                 BufferedReader in = new BufferedReader(new FileReader("src/WordList" + name));
                 String line;
                 while ((line = in.readLine()) != null) {
-                    if (text.contains(line)) {
-                        count++;
+                    String regex = ".*\\b"+line+"\\b.*";
+                    if(line.matches(".*[^a-zA-Z]+.*")){
+                        //skip the word
+                       // System.out.println("skipped: " + line);
+                    }
+                    else{
+                        if(text.matches(regex)){
+                            count++;
+                        }
                     }
                 }
                 switch (name) {

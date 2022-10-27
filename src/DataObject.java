@@ -12,6 +12,9 @@ public class DataObject {
 
     private int SpaceCount;
 
+    private int textLenght;
+    private int specialCharacters;
+
     //possible new Attributes -> see Attribute Ideas
 
     public DataObject(int id, String text, int groupId) {

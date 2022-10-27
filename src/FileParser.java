@@ -25,7 +25,7 @@ public class FileParser {
         }
 
         ArrayList<String> matches = new ArrayList<>();
-        Pattern pattern = Pattern.compile("(\\d,'.*?',[0-3])");
+        Pattern pattern = Pattern.compile("(\\d*,'.*?',[0-3])");
         Matcher matcher = pattern.matcher(string);
 
         while(matcher.find()){
