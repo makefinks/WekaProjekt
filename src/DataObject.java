@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DataObject {
 
@@ -16,8 +18,12 @@ public class DataObject {
 
     private int SpaceCount;
 
-    private int textLenght;
-    private int specialCharacters;
+    private int textLength;
+
+
+    private double averageSentenceLength;
+
+    private long specialCharacterCount;
 
     public static ArrayList<Pair> atts = new ArrayList<>();
 
@@ -36,10 +42,30 @@ public class DataObject {
         this.id = id;
         this.text = text;
         this.groupId = groupId;
+        textLength = text.length();
     }
 
     public int getId() {
         return id;
+    }
+    public void setTextLength(int textLength) {
+        this.textLength = textLength;
+    }
+
+    public void setAverageSentenceLength(double averageSentenceLength) {
+        this.averageSentenceLength = averageSentenceLength;
+    }
+
+    public void setSpecialCharacterCount(long specialCharacterCount) {
+        this.specialCharacterCount = specialCharacterCount;
+    }
+
+    public int getTextLength() {
+        return textLength;
+    }
+
+    public long getSpecialCharacterCount() {
+        return specialCharacterCount;
     }
 
     public void setId(int id) {
