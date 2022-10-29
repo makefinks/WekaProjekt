@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class DataObject {
 
     private int id;
@@ -15,12 +17,19 @@ public class DataObject {
     private int textLenght;
     private int specialCharacters;
 
+    public static HashMap<String, String> atts = new HashMap<>();
+
     //possible new Attributes -> see Attribute Ideas
 
     public DataObject(int id, String text, int groupId) {
         this.id = id;
         this.text = text;
         this.groupId = groupId;
+
+        atts.put("id", "numeric");
+        atts.put("text", "string");
+        atts.put("groupid", "{0,1,2,3}");
+
     }
 
     public int getId() {
