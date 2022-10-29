@@ -1,7 +1,9 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DataObject {
 
+    public record Pair(String name, String type){}
     private int id;
     private String text;
     private int groupId;
@@ -17,23 +19,23 @@ public class DataObject {
     private int textLenght;
     private int specialCharacters;
 
-    public static HashMap<String, String> atts = new HashMap<>();
+    public static ArrayList<Pair> atts = new ArrayList<>();
+
+    static {
+        atts.add(new Pair("id", "numeric"));
+        atts.add(new Pair("text", "string"));
+        atts.add(new Pair("groupId", "{0,1,2,3}"));
+        atts.add(new Pair("atheismCount", "numeric"));
+        atts.add(new Pair("graphicsCount", "numeric"));
+        atts.add(new Pair("spaceCount", "numeric"));
+        atts.add(new Pair("ReligionCount", "numeric"));
+    }
 
     //possible new Attributes -> see Attribute Ideas
-
     public DataObject(int id, String text, int groupId) {
         this.id = id;
         this.text = text;
         this.groupId = groupId;
-
-        atts.put("id", "numeric");
-        atts.put("text", "string");
-        atts.put("groupid", "{0,1,2,3}");
-        atts.put("atheismCount", "numeric");
-        atts.put("graphicsCount", "numeric");
-        atts.put("spaceCount", "numeric");
-        atts.put("religionCount", "numeric");
-
     }
 
     public int getId() {

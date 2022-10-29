@@ -1,3 +1,4 @@
+import javax.xml.crypto.Data;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,12 +16,15 @@ public class ArffWriter {
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(pathname));
 
-        writer.write("@Relation '20newsgroups'\n");
+        writer.write("@relation '20newsgroups'\n\n");
 
-        for(String key : DataObject.atts.keySet()){
+        System.out.println(DataObject.atts.size());
+        for(int i = 0; i<DataObject.atts.size(); i++){
             writer.write("@attribute ");
-            writer.write(key + " " + DataObject.atts.get(key) + "\n");
+            writer.write(DataObject.atts.get(i).name() + " " + DataObject.atts.get(i).type() + "\n");
         }
+
+        writer.write("\n");
 
         writer.write("@data\n");
 

@@ -12,7 +12,7 @@ public class arffWriterTest {
         objets.add(new DataObject(3, "Space", 2));
         objets.add(new DataObject(4, "Religion", 3));
 
-        ArffWriter writer = new ArffWriter("testOutput");
+        ArffWriter writer = new ArffWriter("testOutput.arff");
 
         writer.writeObjects(objets);
 
