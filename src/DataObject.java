@@ -29,6 +29,10 @@ public class DataObject {
         atts.put("id", "numeric");
         atts.put("text", "string");
         atts.put("groupid", "{0,1,2,3}");
+        atts.put("atheismCount", "numeric");
+        atts.put("graphicsCount", "numeric");
+        atts.put("spaceCount", "numeric");
+        atts.put("religionCount", "numeric");
 
     }
 

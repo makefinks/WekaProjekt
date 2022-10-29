@@ -26,7 +26,7 @@ public class ArffWriter {
 
         for(DataObject obj : objects){
             writer.write(obj.getId() + ","
-                    + obj.getText()             + ","
+                    + "'" + obj.getText() +"'"         + ","
                     + obj.getGroupId()          + ","
                     + obj.getAtheismCount()     + ","
                     + obj.getGraphicsCount()    + ","
