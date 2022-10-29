@@ -31,7 +31,6 @@ public class FileParser {
         while(matcher.find()){
             matches.add(matcher.group(1));
         }
-
         ArrayList<DataObject> splitResults = new ArrayList<>();
         for(int i = 0; i<matches.size(); i++){
             String[] split = matches.get(i).split(",");
@@ -40,6 +39,7 @@ public class FileParser {
             for(int x = 1; x<split.length-2; x++){
                 text += split[x];
             }
+            text = text.replace("'", "");
             int groupid = Integer.parseInt(split[split.length-1]);
 
             DataObject object = new DataObject(id, text, groupid);

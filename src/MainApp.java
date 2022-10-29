@@ -14,6 +14,7 @@ public class MainApp {
 
         ArrayList<DataObject> objects = parser.parseFile();
 
+        System.out.println(objects.get(3));
         /*
         parser.writeReadableFile("readable");
         parser.writeSortedReadableFile("sorted");
@@ -147,13 +148,10 @@ public class MainApp {
             }
         }
 
-        for (int i = 0; i < 100; i++) {
-            if(objects.get(i).getText().length() < 500){
-                System.out.println(objects.get(i));
+        System.out.println("printing");
+        ArffWriter fwriter = new ArffWriter("arfoutput");
+        fwriter.writeObjects(objects);
 
-            }
-
-        }
     }
 
     }
