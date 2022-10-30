@@ -38,4 +38,10 @@ public class AttributeAnalyser {
         Matcher specialCharacterMatcher = SPECIAL_CHARACTER_PATTERN.matcher(text);
         return (int) specialCharacterMatcher.results().count();
     }
+    private int anzahlNrCount(String text) {
+        Pattern nr_PATTERN = Pattern.compile("[0-9]");
+        Matcher nrMatcher = nr_PATTERN.matcher(text);
+        return (int) nrMatcher.results().count();
+    }
+
 }
