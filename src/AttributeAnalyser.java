@@ -23,7 +23,7 @@ public class AttributeAnalyser {
     
     private double averageSentenceLength(String text) {
     	
-    	String[] saetze=text.split(".|:");
+    	String[] saetze=text.split("/. | /:");
     	int count=saetze.length;
     	int sum=0;
     	for(int i=0;i<count;i++) {
