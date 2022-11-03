@@ -38,4 +38,7 @@ public class AttributeAnalyser {
         Matcher specialCharacterMatcher = SPECIAL_CHARACTER_PATTERN.matcher(text);
         return (int) specialCharacterMatcher.results().count();
     }
+
+
+
 }

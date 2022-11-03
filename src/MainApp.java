@@ -14,8 +14,7 @@ public class MainApp {
 
         ArrayList<DataObject> objects = parser.parseFile();
 
-        System.out.println(objects.get(3));
-        /*
+
         parser.writeReadableFile("readable");
         parser.writeSortedReadableFile("sorted");
         parser.writeGroupToFile(0, "group0");
@@ -26,8 +25,8 @@ public class MainApp {
         parser.writePureTextFromGroupTofile(1, "group1rawText");
         parser.writePureTextFromGroupTofile(2, "group2rawText");
         parser.writePureTextFromGroupTofile(3, "group3rawText");
-        /*
-         */
+
+
 
 
 
@@ -149,7 +148,7 @@ public class MainApp {
         }
 
         System.out.println("printing");
-        ArffWriter fwriter = new ArffWriter("arfoutput");
+        ArffWriter fwriter = new ArffWriter("arfoutput.arff");
         fwriter.writeObjects(objects);
 
     }

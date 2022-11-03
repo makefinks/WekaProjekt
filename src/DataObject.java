@@ -20,11 +20,9 @@ public class DataObject {
 
     private int textLength;
 
-
     private double averageSentenceLength;
 
     private long specialCharacterCount;
-
     public static ArrayList<Pair> atts = new ArrayList<>();
 
     static {
@@ -35,6 +33,7 @@ public class DataObject {
         atts.add(new Pair("graphicsCount", "numeric"));
         atts.add(new Pair("spaceCount", "numeric"));
         atts.add(new Pair("ReligionCount", "numeric"));
+
     }
 
     //possible new Attributes -> see Attribute Ideas
