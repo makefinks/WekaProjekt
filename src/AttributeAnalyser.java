@@ -19,14 +19,19 @@ public class AttributeAnalyser {
             String text = object.getText();
     		object.setAverageSentenceLength(averageSentenceLength(text));
             object.setSpecialCharacterCount(countRegexMatches(text, "[^A-Za-z0-9\s]"));
+            object.setNumberCount(countRegexMatches(text, "[0-9]"));
+            //email regex inspiration
+            // https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
+            object.setEmailCount(countRegexMatches(text, "[a-z0-9!#$%&'*+\\/=?^_{|}~\\-]+[\\.a-z0-9!#$%&'*+\\/=?^_{|}~\\-]*@[a-z0-9\\-\\[\\]]+[\\.a-z0-9\\-\\[\\]]*"));
     	});
     }
     
-    public static double averageSentenceLength(String text) {
-        Matcher matcher = Pattern.compile("(\\s(\\.|!|\\?|:)|\\[\\.{1,3}\\]|(Mr|Ms|Mrs)\\.|(\\.|!|\\?|:)[^\\s\\.\\?!:]|\\d\\.|[^.!?:\\n\\r])+(\\.|!|\\?|:|\\n|\\r)")
+    public double averageSentenceLength(String text) {
+        Matcher matcher = Pattern.compile("(\\s(\\.|!|\\?|:)|\\[\\.{1,3}\\]|(Mr|Ms|Mrs)\\.|(\\.|!|\\?|:)[^\\s\\.\\?!:]|\\d\\.|[^.!?:\\n\\r])+(\\.|!|\\?|:|\\n|\\r)",
+                Pattern.CASE_INSENSITIVE)
                 .matcher(text);
-        int numberOfMatches = 0;
-        int lengthOfText = 0;
+        double numberOfMatches = 0;
+        double lengthOfText = 0;
         //fuer jeden match (satz) die satzlaenge berechnen
         //und addieren
         while (matcher.find()) {
@@ -39,15 +44,18 @@ public class AttributeAnalyser {
         return lengthOfText / numberOfMatches;
     }
 
-    private int countRegexMatches(String text, String regex) {
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(text);
+    private static int countRegexMatches(String text, String regex) {
+        Matcher matcher = Pattern.compile(regex,
+            Pattern.CASE_INSENSITIVE |
+                Pattern.MULTILINE)
+                .matcher(text);
         return (int) matcher.results().count();
     }
-    private int anzahlNrCount(String text) {
+
+    /*private int anzahlNrCount(String text) {
         Pattern nr_PATTERN = Pattern.compile("[0-9]");
         Matcher nrMatcher = nr_PATTERN.matcher(text);
         return (int) nrMatcher.results().count();
-    }
+    }*/
 
 }
