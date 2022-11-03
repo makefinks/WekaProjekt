@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.*;
 
 public class AttributeAnalyser {
 
@@ -17,26 +18,31 @@ public class AttributeAnalyser {
     	data.forEach((object)->{
             String text = object.getText();
     		object.setAverageSentenceLength(averageSentenceLength(text));
-            object.setSpecialCharacterCount(specialCharCount(text));
+            object.setSpecialCharacterCount(countRegexMatches(text, "[^A-Za-z0-9\s]"));
     	});
     }
     
-    private double averageSentenceLength(String text) {
-    	
-    	String[] saetze=text.split("/. | /:");
-    	int count=saetze.length;
-    	int sum=0;
-    	for(int i=0;i<count;i++) {
-    		sum+=saetze[i].length();
-    	}
-    	return sum/count;
-    	
+    public static double averageSentenceLength(String text) {
+        Matcher matcher = Pattern.compile("(\\s(\\.|!|\\?|:)|\\[\\.{1,3}\\]|(Mr|Ms|Mrs)\\.|(\\.|!|\\?|:)[^\\s\\.\\?!:]|\\d\\.|[^.!?:\\n\\r])+(\\.|!|\\?|:|\\n|\\r)")
+                .matcher(text);
+        int numberOfMatches = 0;
+        int lengthOfText = 0;
+        //fuer jeden match (satz) die satzlaenge berechnen
+        //und addieren
+        while (matcher.find()) {
+            String sentence = matcher.group();
+            if (sentence != "") {
+                lengthOfText += sentence.length();
+                numberOfMatches++;
+            }
+        }
+        return lengthOfText / numberOfMatches;
     }
 
-    private int specialCharCount(String text) {
-        Pattern SPECIAL_CHARACTER_PATTERN = Pattern.compile("[^A-Za-z0-9\s]");
-        Matcher specialCharacterMatcher = SPECIAL_CHARACTER_PATTERN.matcher(text);
-        return (int) specialCharacterMatcher.results().count();
+    private int countRegexMatches(String text, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(text);
+        return (int) matcher.results().count();
     }
     private int anzahlNrCount(String text) {
         Pattern nr_PATTERN = Pattern.compile("[0-9]");
