@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.*;
 
 public class AttributeAnalyser {
 
@@ -17,28 +18,44 @@ public class AttributeAnalyser {
     	data.forEach((object)->{
             String text = object.getText();
     		object.setAverageSentenceLength(averageSentenceLength(text));
-            object.setSpecialCharacterCount(specialCharCount(text));
+            object.setSpecialCharacterCount(countRegexMatches(text, "[^A-Za-z0-9\s]"));
+            object.setNumberCount(countRegexMatches(text, "[0-9]"));
+            //email regex inspiration
+            // https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
+            object.setEmailCount(countRegexMatches(text, "[a-z0-9!#$%&'*+\\/=?^_{|}~\\-]+[\\.a-z0-9!#$%&'*+\\/=?^_{|}~\\-]*@[a-z0-9\\-\\[\\]]+[\\.a-z0-9\\-\\[\\]]*"));
     	});
     }
     
-    private double averageSentenceLength(String text) {
-    	
-    	String[] saetze=text.split(".|:");
-    	int count=saetze.length;
-    	int sum=0;
-    	for(int i=0;i<count;i++) {
-    		sum+=saetze[i].length();
-    	}
-    	return sum/count;
-    	
+    public double averageSentenceLength(String text) {
+        Matcher matcher = Pattern.compile("(\\s(\\.|!|\\?|:)|\\[\\.{1,3}\\]|(Mr|Ms|Mrs)\\.|(\\.|!|\\?|:)[^\\s\\.\\?!:]|\\d\\.|[^.!?:\\n\\r])+(\\.|!|\\?|:|\\n|\\r)",
+                Pattern.CASE_INSENSITIVE)
+                .matcher(text);
+        double numberOfMatches = 0;
+        double lengthOfText = 0;
+        //fuer jeden match (satz) die satzlaenge berechnen
+        //und addieren
+        while (matcher.find()) {
+            String sentence = matcher.group();
+            if (sentence != "") {
+                lengthOfText += sentence.length();
+                numberOfMatches++;
+            }
+        }
+        return lengthOfText / numberOfMatches;
     }
 
-    private int specialCharCount(String text) {
-        Pattern SPECIAL_CHARACTER_PATTERN = Pattern.compile("[^A-Za-z0-9\s]");
-        Matcher specialCharacterMatcher = SPECIAL_CHARACTER_PATTERN.matcher(text);
-        return (int) specialCharacterMatcher.results().count();
+    private static int countRegexMatches(String text, String regex) {
+        Matcher matcher = Pattern.compile(regex,
+            Pattern.CASE_INSENSITIVE |
+                Pattern.MULTILINE)
+                .matcher(text);
+        return (int) matcher.results().count();
     }
 
-
+    /*private int anzahlNrCount(String text) {
+        Pattern nr_PATTERN = Pattern.compile("[0-9]");
+        Matcher nrMatcher = nr_PATTERN.matcher(text);
+        return (int) nrMatcher.results().count();
+    }*/
 
 }

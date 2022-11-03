@@ -23,6 +23,11 @@ public class DataObject {
     private double averageSentenceLength;
 
     private long specialCharacterCount;
+
+    private int numberCount;
+
+    private int emailCount;
+
     public static ArrayList<Pair> atts = new ArrayList<>();
 
     static {
@@ -33,7 +38,6 @@ public class DataObject {
         atts.add(new Pair("graphicsCount", "numeric"));
         atts.add(new Pair("spaceCount", "numeric"));
         atts.add(new Pair("ReligionCount", "numeric"));
-
     }
 
     //possible new Attributes -> see Attribute Ideas
@@ -117,6 +121,26 @@ public class DataObject {
 
     public void setSpaceCount(int spaceCount) {
         SpaceCount = spaceCount;
+    }
+
+    public double getAverageSentenceLength() {
+        return averageSentenceLength;
+    }
+
+    public int getNumberCount() {
+        return numberCount;
+    }
+
+    public void setNumberCount(int numberCount) {
+        this.numberCount = numberCount;
+    }
+
+    public int getEmailCount() {
+        return emailCount;
+    }
+
+    public void setEmailCount(int emailCount) {
+        this.emailCount = emailCount;
     }
 
     @Override
