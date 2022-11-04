@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -7,25 +8,28 @@ import java.util.regex.*;
 public class AttributeAnalyser {
 
     private ArrayList<DataObject> data;
-    public AttributeAnalyser(List<DataObject> data){
+
+    public AttributeAnalyser(List<DataObject> data) {
         this.data = (ArrayList<DataObject>) data;
         execute();
     }
-    public void checkWordCount(){
+
+    public void checkWordCount() {
 
     }
+
     public void execute() {
-    	data.forEach((object)->{
+        data.forEach((object) -> {
             String text = object.getText();
-    		object.setAverageSentenceLength(averageSentenceLength(text));
+            object.setAverageSentenceLength(averageSentenceLength(text));
             object.setSpecialCharacterCount(countRegexMatches(text, "[^A-Za-z0-9\s]"));
             object.setNumberCount(countRegexMatches(text, "[0-9]"));
             //email regex inspiration
             // https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
             object.setEmailCount(countRegexMatches(text, "[a-z0-9!#$%&'*+\\/=?^_{|}~\\-]+[\\.a-z0-9!#$%&'*+\\/=?^_{|}~\\-]*@[a-z0-9\\-\\[\\]]+[\\.a-z0-9\\-\\[\\]]*"));
-    	});
+        });
     }
-    
+
     public double averageSentenceLength(String text) {
         Matcher matcher = Pattern.compile("(\\s(\\.|!|\\?|:)|\\[\\.{1,3}\\]|(Mr|Ms|Mrs)\\.|(\\.|!|\\?|:)[^\\s\\.\\?!:]|\\d\\.|[^.!?:\\n\\r])+(\\.|!|\\?|:|\\n|\\r)",
                 Pattern.CASE_INSENSITIVE)
@@ -58,4 +62,25 @@ public class AttributeAnalyser {
         return (int) nrMatcher.results().count();
     }*/
 
+    private void deleteLeerTexte(String text) {
+        String inputFileName = text;
+        String outputFileName = "NewText.txt";
+
+        try (BufferedReader inputFile = new BufferedReader(new FileReader(inputFileName));
+             PrintWriter outputFile = new PrintWriter(new FileWriter(outputFileName))) {
+
+            String lineOfText = null;
+            while ((lineOfText = inputFile.readLine()) != null) {
+                lineOfText = lineOfText.trim();
+                if (!lineOfText.isEmpty()) {
+                    outputFile.print(lineOfText);
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
