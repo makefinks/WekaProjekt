@@ -153,6 +153,11 @@ public class DataObject {
                 ", GraphicsCount=" + GraphicsCount +
                 ", ReligionCount=" + ReligionCount +
                 ", SpaceCount=" + SpaceCount +
+                ", textLength=" + textLength +
+                ", averageSentenceLength=" + averageSentenceLength +
+                ", specialCharacterCount=" + specialCharacterCount +
+                ", numberCount=" + numberCount +
+                ", emailCount=" + emailCount +
                 '}';
     }
 }

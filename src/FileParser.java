@@ -157,8 +157,6 @@ public class FileParser {
                 }
             }
 
-
-
             //print the words to a file respecting the minAmount parameter
             File file = new File("WordList" + fNames.get(groupid));
             BufferedWriter out = new BufferedWriter(new FileWriter(file.getPath()));

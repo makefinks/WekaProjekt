@@ -14,6 +14,7 @@ public class MainApp {
 
         ArrayList<DataObject> objects = parser.parseFile();
 
+        AttributeAnalyser analyser = new AttributeAnalyser(objects);
 
         /*
         parser.writeReadableFile("readable");
@@ -29,9 +30,9 @@ public class MainApp {
          */
 
         parser.createWordLists(50);
+        System.out.println(objects);
 
-
-
+        ArffWriter writer = new ArffWriter("arffOutput");
 
             /*
          ArrayList<ArrayList<String>> files = new ArrayList<>();
@@ -152,6 +153,7 @@ public class MainApp {
         fwriter.writeObjects(objects);
          */
     }
+
 
     }
 
