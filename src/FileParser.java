@@ -1,6 +1,7 @@
+import javax.xml.crypto.Data;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.nio.Buffer;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,9 +9,11 @@ public class FileParser {
 
     private String filePath;
     ArrayList<DataObject> parsedObjects;
+    List<String> fNames;
 
     public FileParser(String filepath) {
         filePath = filepath;
+        fNames = Arrays.asList("Atheism", "Graphics", "Space", "Religion");
     }
 
     public ArrayList<DataObject> parseFile() throws IOException {
@@ -127,6 +130,49 @@ public class FileParser {
                 bw.write(o.getText() + "\n");
             }
         }
+    }
+
+    public void createWordLists(int minVorkommen) throws IOException {
+
+        assert parsedObjects != null;
+
+        for(int groupid = 0; groupid<= 3; groupid++){
+            ArrayList<String> allWords = new ArrayList<>();
+            for(DataObject obj : parsedObjects){
+                if(obj.getGroupId() == groupid){
+                String objText = obj.getText();
+                allWords.addAll(List.of(objText.split(" ")));
+                }
+            }
+
+            allWords.removeIf(""::equals);
+
+            HashMap<String, Integer> countMap = new HashMap<>();
+            for(String s : allWords){
+                if(countMap.containsKey(s)){
+                    countMap.put(s, countMap.get(s)+1);
+                }
+                else{
+                    countMap.put(s, 1);
+                }
+            }
+
+
+
+            //print the words to a file respecting the minAmount parameter
+            File file = new File("WordList" + fNames.get(groupid));
+            BufferedWriter out = new BufferedWriter(new FileWriter(file.getPath()));
+
+            for(String entry : countMap.keySet()){
+                int entryCount = countMap.get(entry);
+                if(entryCount >= minVorkommen && entry.length() > 2){
+                    out.write(entry + "\n");
+                }
+            }
+            out.close();
+
+        }
+
     }
 
 }

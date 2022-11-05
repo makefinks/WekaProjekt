@@ -15,6 +15,7 @@ public class MainApp {
         ArrayList<DataObject> objects = parser.parseFile();
 
 
+        /*
         parser.writeReadableFile("readable");
         parser.writeSortedReadableFile("sorted");
         parser.writeGroupToFile(0, "group0");
@@ -25,14 +26,15 @@ public class MainApp {
         parser.writePureTextFromGroupTofile(1, "group1rawText");
         parser.writePureTextFromGroupTofile(2, "group2rawText");
         parser.writePureTextFromGroupTofile(3, "group3rawText");
+         */
 
+        parser.createWordLists(50);
 
 
 
 
             /*
          ArrayList<ArrayList<String>> files = new ArrayList<>();
-
          for(String name : fNames){
              BufferedReader in = new BufferedReader(new FileReader("src/FrequencyWords"+name));
              String line;
@@ -42,19 +44,13 @@ public class MainApp {
              }
              files.add(lines);
          }
-
          //delete common words:
-
         System.out.println("Before");
         for(ArrayList<String> list : files){
             System.out.println(list.size());
         }
-
         ArrayList<ArrayList<String>> originalFiles = new ArrayList<>();
-
         files.forEach(x -> originalFiles.add((ArrayList<String>) x.clone()));
-
-
         for(int i = 0; i<files.size(); i++){
             for(int b = 0; b<originalFiles.get(i).size(); b++){
                 String s = originalFiles.get(i).get(b);
@@ -110,6 +106,10 @@ public class MainApp {
             */
 
 
+        /*
+        ------------------------------------------------
+        Zählt die vorkommen von Schlüsselwörtern in den einzelnen Texten
+        ------------------------------------------------
         for (DataObject obj : objects) {
             System.out.println("Instance: " + objects.indexOf(obj));
             String text = obj.getText();
@@ -150,7 +150,7 @@ public class MainApp {
         System.out.println("printing");
         ArffWriter fwriter = new ArffWriter("arfoutput.arff");
         fwriter.writeObjects(objects);
-
+         */
     }
 
     }
