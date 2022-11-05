@@ -32,7 +32,8 @@ public class MainApp {
         parser.createWordLists(50);
         System.out.println(objects);
 
-        ArffWriter writer = new ArffWriter("arffOutput");
+        ArffWriter writer = new ArffWriter("arffOutput.arff");
+        writer.writeObjects(objects);
 
             /*
          ArrayList<ArrayList<String>> files = new ArrayList<>();

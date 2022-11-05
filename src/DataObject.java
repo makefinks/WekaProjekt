@@ -37,7 +37,12 @@ public class DataObject {
         atts.add(new Pair("atheismCount", "numeric"));
         atts.add(new Pair("graphicsCount", "numeric"));
         atts.add(new Pair("spaceCount", "numeric"));
-        atts.add(new Pair("ReligionCount", "numeric"));
+        atts.add(new Pair("religionCount", "numeric"));
+        atts.add(new Pair("textLength", "numeric"));
+        atts.add(new Pair("averageSentenceLength", "numeric"));
+        atts.add(new Pair("specialCharacterCount", "numeric"));
+        atts.add(new Pair("numberCount", "numeric"));
+        atts.add(new Pair("emailCount", "numeric"));
     }
 
     //possible new Attributes -> see Attribute Ideas
