@@ -83,4 +83,20 @@ public class AttributeAnalyser {
             throw new RuntimeException(e);
         }
     }
+
+    private double countAverageWordLength(String text){
+        int count = 0;
+        double sum = 0;
+        String[] words = text.split("\\s+");
+        for (String word : words) {
+           double wordLength = word.length();
+           sum += wordLength;
+           count++;
+        }
+        double average = 0;
+        if (count > 0) {
+            average = sum / count;
+        }
+        return average;
+    }
 }
