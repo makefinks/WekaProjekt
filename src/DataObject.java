@@ -9,7 +9,6 @@ public class DataObject {
     private int id;
     private String text;
     private int groupId;
-
     private int AtheismCount;
 
     private int GraphicsCount;
@@ -33,7 +32,6 @@ public class DataObject {
     static {
         atts.add(new Pair("id", "numeric"));
         atts.add(new Pair("text", "string"));
-        atts.add(new Pair("groupId", "{0,1,2,3}"));
         atts.add(new Pair("atheismCount", "numeric"));
         atts.add(new Pair("graphicsCount", "numeric"));
         atts.add(new Pair("spaceCount", "numeric"));
@@ -43,6 +41,7 @@ public class DataObject {
         atts.add(new Pair("specialCharacterCount", "numeric"));
         atts.add(new Pair("numberCount", "numeric"));
         atts.add(new Pair("emailCount", "numeric"));
+        atts.add(new Pair("groupId", "{'Atheism', 'Graphics', 'Space', 'Religion'}"));
     }
 
     //possible new Attributes -> see Attribute Ideas

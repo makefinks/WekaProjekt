@@ -20,6 +20,54 @@ public class FileParser {
 
         parsedObjects = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
+
+        String l;
+        while((l = reader.readLine()) != null){
+            if(l.equals("@data")){
+                break;
+            }
+        }
+
+        /*
+        String line;
+        while((line = reader.readLine()) != null){
+            int firstComma = 0;
+            int lastComma = line.length()-2;
+            for(int i = 0; i<line.length(); i++){
+                if(line.charAt(i) == ','){
+                    firstComma = i;
+                    break;
+                }
+            }
+            int id = Integer.parseInt(line.substring(0, firstComma));
+            int groupId = Integer.parseInt(line.substring(lastComma, line.length()));
+            String text = line.substring(firstComma+1, lastComma);
+            parsedObjects.add(new DataObject(id, text, groupId));
+         */
+
+        String line;
+        while((line = reader.readLine()) != null){
+            int id = Integer.parseInt(line.substring(0, line.indexOf(",")));
+
+            int firstComma = line.indexOf(",");
+            int lastComma = line.lastIndexOf(",");
+            if(lastComma - firstComma <= 2){
+                continue;
+            }
+
+            String text = line.substring(firstComma+2, lastComma-1);
+            int groupId = Integer.parseInt(line.substring(line.lastIndexOf(",")+1, line.length()));
+
+            if(!text.isEmpty()) {
+                parsedObjects.add(new DataObject(id, text, groupId));
+            }
+        }
+
+        return parsedObjects;
+
+        /*
+        parsedObjects = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(filePath));
         StringBuilder string = new StringBuilder();
 
         String line;
@@ -27,20 +75,23 @@ public class FileParser {
             string.append(line);
         }
 
+        /*
         ArrayList<String> matches = new ArrayList<>();
         Pattern pattern = Pattern.compile("(\\d*,'.*?',[0-3])");
         Matcher matcher = pattern.matcher(string);
 
+
         while(matcher.find()){
             matches.add(matcher.group(1));
         }
+
         ArrayList<DataObject> splitResults = new ArrayList<>();
         for(int i = 0; i<matches.size(); i++){
             String[] split = matches.get(i).split(",");
             int id = Integer.parseInt(split[0]);
             String text = "";
             for(int x = 1; x<split.length-2; x++){
-                text += split[x];
+                text += split[x] + ",";
             }
             text = text.replace("'", "");
             int groupid = Integer.parseInt(split[split.length-1]);
@@ -51,6 +102,7 @@ public class FileParser {
         }
         parsedObjects = splitResults;
         return splitResults;
+         */
     }
 
     public String getFilePath() {
@@ -82,7 +134,7 @@ public class FileParser {
 
         BufferedWriter bw = new BufferedWriter(new FileWriter(file.getPath()));
 
-        //sort dataobjects by groupId
+        //sort dataobjec    ts by groupId
         parsedObjects.sort((x, y) -> Integer.compare(x.getGroupId(), y.getGroupId()));
 
         for(DataObject o : parsedObjects){

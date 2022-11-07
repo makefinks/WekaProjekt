@@ -27,7 +27,7 @@ public class AttributeAnalyser {
             // https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
             object.setEmailCount(countRegexMatches(text, "[a-z0-9!#$%&'*+\\/=?^_{|}~\\-]+[\\.a-z0-9!#$%&'*+\\/=?^_{|}~\\-]*@[a-z0-9\\-\\[\\]]+[\\.a-z0-9\\-\\[\\]]*"));
         });
-        setKeyWordCount();
+        //setKeyWordCount();
     }
 
     public double averageSentenceLength(String text) {
@@ -62,11 +62,26 @@ public class AttributeAnalyser {
         return (int) nrMatcher.results().count();
     }*/
 
-    private void deleteEmptyText() {
-        for(DataObject obj:data){
-            if(obj.getText().isEmpty()){
-                data.remove(obj);
+    private void deleteLeerTexte(String text) {
+        String inputFileName = text;
+        String outputFileName = "NewText.txt";
+
+        try (BufferedReader inputFile = new BufferedReader(new FileReader(inputFileName));
+             PrintWriter outputFile = new PrintWriter(new FileWriter(outputFileName)))
+        {
+
+            String lineOfText = null;
+            while ((lineOfText = inputFile.readLine()) != null) {
+                lineOfText = lineOfText.trim();
+                if (!lineOfText.isEmpty()) {
+                    outputFile.print(lineOfText);
+                }
             }
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 

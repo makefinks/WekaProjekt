@@ -29,9 +29,15 @@ public class ArffWriter {
         writer.write("@data\n");
 
         for(DataObject obj : objects){
+            String group = switch (obj.getGroupId()) {
+                case 0 -> "Atheism";
+                case 1 -> "Graphics";
+                case 2 -> "Space";
+                case 3 -> "Religion";
+                default -> "";
+            };
             writer.write(obj.getId() + ","
                     + "'" + obj.getText() +"'"          + ","
-                    + obj.getGroupId()                  + ","
                     + obj.getAtheismCount()             + ","
                     + obj.getGraphicsCount()            + ","
                     + obj.getSpaceCount()               + ","
@@ -40,7 +46,8 @@ public class ArffWriter {
                     + obj.getAverageSentenceLength()    + ","
                     + obj.getSpecialCharacterCount()    + ","
                     + obj.getNumberCount()              + ","
-                    + obj.getEmailCount()               + "\n"
+                    + obj.getEmailCount()               + ","
+                    + group                             + "\n"
             );
         }
 

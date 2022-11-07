@@ -8,13 +8,35 @@ import java.util.regex.Pattern;
 public class MainApp {
 
     public static void main(String[] args) throws IOException {
-        FileParser parser = new FileParser("20newsgroups.arff");
 
         List<String> fNames = Arrays.asList("Atheism", "Graphics", "Religion", "Space");
 
+        FileParser parser = new FileParser("20newsgroupsTrainingarff.arff");
         ArrayList<DataObject> objects = parser.parseFile();
 
+
+        parser.createWordLists(50);
         AttributeAnalyser analyser = new AttributeAnalyser(objects);
+
+        objects.forEach(x -> {
+            System.out.println(x.getTextLength());
+        });
+
+        ArffWriter writer = new ArffWriter("arffOutputTraining.arff");
+        writer.writeObjects(objects);
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+
+
+
+
+        FileParser testParser = new FileParser("20newsgroupsTesting.arff");
+        ArrayList<DataObject> testObjects = testParser.parseFile();
+        AttributeAnalyser testAnalyser = new AttributeAnalyser(testObjects);
+        ArffWriter testWriter = new ArffWriter("arffOutputTesting.arff");
+        testWriter.writeObjects(testObjects);
+
 
         /*
         parser.writeReadableFile("readable");
@@ -29,11 +51,7 @@ public class MainApp {
         parser.writePureTextFromGroupTofile(3, "group3rawText");
          */
 
-        parser.createWordLists(50);
-        System.out.println(objects);
 
-        ArffWriter writer = new ArffWriter("arffOutput.arff");
-        writer.writeObjects(objects);
 
             /*
          ArrayList<ArrayList<String>> files = new ArrayList<>();
