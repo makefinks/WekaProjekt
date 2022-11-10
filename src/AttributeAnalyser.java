@@ -25,7 +25,7 @@ public class AttributeAnalyser {
             int sCharCount = countRegexMatches(text, "[^A-Za-z0-9\s]");
             object.setSpecialCharacterCount(sCharCount);
 
-            double avgSpecialCharacters = avgSpecialCharacters(object.getText(), sCharCount);
+            double avgSpecialCharacters = avgSpecialCharacters(text, sCharCount);
             object.setAvgSpecialCharacters(avgSpecialCharacters);
             avgSpecialCharacters=avgSpecialCharacters-(avgSpecialCharacters%0.01);
 

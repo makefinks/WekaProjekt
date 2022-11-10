@@ -58,9 +58,19 @@ public class FileParser {
             String text = line.substring(firstComma+2, lastComma-1);
             int groupId = Integer.parseInt(line.substring(line.lastIndexOf(",")+1, line.length()));
 
-            if(!text.isEmpty()) {
-                parsedObjects.add(new DataObject(id, text, groupId));
+            if(text.isEmpty()) {
+                continue;
             }
+            //wenn ein text nicht mindestens ein Buchstabe hat
+            //wird er nicht hinzugefuegt. Kann man vlt. verbessern:
+            //z.B text braucht mehrere Buchstaben oder Woerter
+            Matcher matcher = Pattern
+                    .compile("[a-z]", Pattern.CASE_INSENSITIVE)
+                    .matcher(text);
+            if (!matcher.find()) {
+                continue;
+            }
+            parsedObjects.add(new DataObject(id, text, groupId));
         }
 
         return parsedObjects;
@@ -93,6 +103,7 @@ public class FileParser {
             for(int x = 1; x<split.length-2; x++){
                 text += split[x] + ",";
             }
+            if (text.matches("(\s+|)")) continue;
             text = text.replace("'", "");
             int groupid = Integer.parseInt(split[split.length-1]);
 
