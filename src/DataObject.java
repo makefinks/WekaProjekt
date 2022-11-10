@@ -27,6 +27,8 @@ public class DataObject {
 
     private int emailCount;
 
+    private double avgSpecialCharacters;
+
     public static ArrayList<Pair> atts = new ArrayList<>();
 
     static {
@@ -42,6 +44,7 @@ public class DataObject {
         atts.add(new Pair("numberCount", "numeric"));
         atts.add(new Pair("emailCount", "numeric"));
         atts.add(new Pair("groupId", "{'Atheism', 'Graphics', 'Space', 'Religion'}"));
+        atts.add(new Pair("avgSpecialCharacters", "numeric"));
     }
 
     //possible new Attributes -> see Attribute Ideas
@@ -145,6 +148,14 @@ public class DataObject {
 
     public void setEmailCount(int emailCount) {
         this.emailCount = emailCount;
+    }
+
+    public void setAvgSpecialCharacters(double avgSpecialCharacters) {
+        this.avgSpecialCharacters = avgSpecialCharacters;
+    }
+
+    public double getAvgSpecialCharacters() {
+        return avgSpecialCharacters;
     }
 
     @Override

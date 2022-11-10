@@ -47,7 +47,9 @@ public class ArffWriter {
                     + obj.getSpecialCharacterCount()    + ","
                     + obj.getNumberCount()              + ","
                     + obj.getEmailCount()               + ","
+                    + obj.getAvgSpecialCharacters()     + ","
                     + group                             + "\n"
+
             );
         }
 

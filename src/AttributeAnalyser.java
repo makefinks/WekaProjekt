@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Formatter;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,14 +21,20 @@ public class AttributeAnalyser {
     public void execute() throws IOException {
         data.forEach((object) -> {
             String text = object.getText();
-            //object.setAverageSentenceLength(averageSentenceLength(text));
-            object.setSpecialCharacterCount(countRegexMatches(text, "[^A-Za-z0-9\s]"));
+            object.setAverageSentenceLength(averageSentenceLength(text));
+            int sCharCount = countRegexMatches(text, "[^A-Za-z0-9\s]");
+            object.setSpecialCharacterCount(sCharCount);
+
+            double avgSpecialCharacters = avgSpecialCharacters(object.getText(), sCharCount);
+            object.setAvgSpecialCharacters(avgSpecialCharacters);
+            avgSpecialCharacters=avgSpecialCharacters-(avgSpecialCharacters%0.01);
+
             object.setNumberCount(countRegexMatches(text, "[0-9]"));
             //email regex inspiration
             // https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
             object.setEmailCount(countRegexMatches(text, "[a-z0-9!#$%&'*+\\/=?^_{|}~\\-]+[\\.a-z0-9!#$%&'*+\\/=?^_{|}~\\-]*@[a-z0-9\\-\\[\\]]+[\\.a-z0-9\\-\\[\\]]*"));
         });
-        //setKeyWordCount();
+        setKeyWordCount();
     }
 
     public double averageSentenceLength(String text) {
@@ -40,12 +47,16 @@ public class AttributeAnalyser {
         //und addieren
         while (matcher.find()) {
             String sentence = matcher.group();
-            if (sentence != "") {
+            if (!sentence.equals("")) {
                 lengthOfText += sentence.length();
                 numberOfMatches++;
             }
         }
         return lengthOfText / numberOfMatches;
+    }
+
+    private static double avgSpecialCharacters(String text, int charCount){
+        return (double) text.length() / charCount;
     }
 
     private static int countRegexMatches(String text, String regex) {

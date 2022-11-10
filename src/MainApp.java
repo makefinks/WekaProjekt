@@ -17,18 +17,8 @@ public class MainApp {
 
         parser.createWordLists(50);
         AttributeAnalyser analyser = new AttributeAnalyser(objects);
-
-        objects.forEach(x -> {
-            System.out.println(x.getTextLength());
-        });
-
         ArffWriter writer = new ArffWriter("arffOutputTraining.arff");
         writer.writeObjects(objects);
-
-        ArrayList<Integer> list = new ArrayList<>();
-
-
-
 
 
         FileParser testParser = new FileParser("20newsgroupsTesting.arff");
