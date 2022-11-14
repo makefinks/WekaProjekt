@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Formatter;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.*;
@@ -10,6 +7,8 @@ import java.util.regex.*;
 public class AttributeAnalyser {
 
     private ArrayList<DataObject> data;
+    WordCalculation wc=new WordCalculation();
+
     List<String> fNames = Arrays.asList("Atheism", "Graphics", "Religion", "Space");
 
     public AttributeAnalyser(List<DataObject> data) throws IOException {
@@ -19,6 +18,8 @@ public class AttributeAnalyser {
 
 
     public void execute() throws IOException {
+        wc.init(data);
+        wc.calculate();
         data.forEach((object) -> {
             String text = object.getText();
             object.setAverageSentenceLength(averageSentenceLength(text));
@@ -34,6 +35,8 @@ public class AttributeAnalyser {
             // https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
             object.setEmailCount(countRegexMatches(text, "[a-z0-9!#$%&'*+\\/=?^_{|}~\\-]+[\\.a-z0-9!#$%&'*+\\/=?^_{|}~\\-]*@[a-z0-9\\-\\[\\]]+[\\.a-z0-9\\-\\[\\]]*"));
         });
+
+
         setKeyWordCount();
     }
 
@@ -73,12 +76,27 @@ public class AttributeAnalyser {
         return (int) nrMatcher.results().count();
     }*/
 
-    private void deleteEmptyText(){
-       for (DataObject obj: data){
-           if(obj.getText().isEmpty()){
-               data.remove(obj);
-           }
-       }
+    private void deleteLeerTexte(String text) {
+        String inputFileName = text;
+        String outputFileName = "NewText.txt";
+
+        try (BufferedReader inputFile = new BufferedReader(new FileReader(inputFileName));
+             PrintWriter outputFile = new PrintWriter(new FileWriter(outputFileName)))
+        {
+
+            String lineOfText = null;
+            while ((lineOfText = inputFile.readLine()) != null) {
+                lineOfText = lineOfText.trim();
+                if (!lineOfText.isEmpty()) {
+                    outputFile.print(lineOfText);
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private double countAverageWordLength(String text){
@@ -142,5 +160,29 @@ public class AttributeAnalyser {
             }
         }
         System.out.println("Finished creating KeyWordCount");
+    }
+    private void keyWordCalculation(DataObject obj){
+        int count0=0,count1=0,count2=0,count3=0;
+        String[] words=obj.getText().split(" ");
+        for(int i=0;i<words.length;i++){
+            String word=words[i];
+            if(wc.getListOfGroup(0).contains(word)){
+                count0++;
+            }
+            if(wc.getListOfGroup(1).contains(word)){
+                count1++;
+            }
+            if(wc.getListOfGroup(2).contains(word)){
+                count2++;
+            }
+            if(wc.getListOfGroup(3).contains(word)){
+                count3++;
+            }
+        }
+        obj.setAtheismCalCount(count0);
+        obj.setGraphicsCalCount(count1);
+        obj.setSpaceCalCount(count2);
+        obj.setReligionCalCount(count3);
+
     }
 }

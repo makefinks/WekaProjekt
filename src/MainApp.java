@@ -15,6 +15,8 @@ public class MainApp {
         ArrayList<DataObject> objects = parser.parseFile();
 
 
+
+
         parser.createWordLists(50);
         AttributeAnalyser analyser = new AttributeAnalyser(objects);
         ArffWriter writer = new ArffWriter("arffOutputTraining.arff");
@@ -28,7 +30,7 @@ public class MainApp {
         testWriter.writeObjects(testObjects);
 
 
-        /*
+/*
         parser.writeReadableFile("readable");
         parser.writeSortedReadableFile("sorted");
         parser.writeGroupToFile(0, "group0");
@@ -39,11 +41,11 @@ public class MainApp {
         parser.writePureTextFromGroupTofile(1, "group1rawText");
         parser.writePureTextFromGroupTofile(2, "group2rawText");
         parser.writePureTextFromGroupTofile(3, "group3rawText");
-         */
 
 
 
-            /*
+
+
          ArrayList<ArrayList<String>> files = new ArrayList<>();
          for(String name : fNames){
              BufferedReader in = new BufferedReader(new FileReader("src/FrequencyWords"+name));
@@ -87,17 +89,18 @@ public class MainApp {
                 for(int x = 0; x<list.size(); x++){
                     out.write(list.get(x)+"\n");
                 }
-            }
         }
-        */
 
 
 
-         /*
+
+
+
             BufferedReader reader = new BufferedReader(new FileReader("src/FrequencyWordsSpace"));
             ArrayList<String> lines = new ArrayList<>();
 
             String line;
+
             while((line = reader.readLine()) != null){
                 lines.add(line);
             }
@@ -109,27 +112,27 @@ public class MainApp {
 
             System.out.println(lines);
 
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src/FrequencyWordsSpace"));
+            BufferedWriter writer1 = new BufferedWriter(new FileWriter("src/FrequencyWordsSpace"));
             for(String l : lines){
-                    writer.write(l + "\n");
+                    writer1.write(l + "\n");
             }
-            */
 
 
-        /*
-        ------------------------------------------------
-        Zählt die vorkommen von Schlüsselwörtern in den einzelnen Texten
-        ------------------------------------------------
+
+
+       // ------------------------------------------------
+       // Zählt die vorkommen von Schlüsselwörtern in den einzelnen Texten
+       // ------------------------------------------------
         for (DataObject obj : objects) {
             System.out.println("Instance: " + objects.indexOf(obj));
             String text = obj.getText();
             int count = 0;
             for (String name : fNames) {
                 BufferedReader in = new BufferedReader(new FileReader("src/WordList" + name));
-                String line;
-                while ((line = in.readLine()) != null) {
+                String line1;
+                while ((line1 = in.readLine()) != null) {
                     String regex = ".*\\b"+line+"\\b.*";
-                    if(line.matches(".*[^a-zA-Z]+.*")){
+                    if(line1.matches(".*[^a-zA-Z]+.*")){
                         //skip the word
                        // System.out.println("skipped: " + line);
                     }
@@ -160,9 +163,9 @@ public class MainApp {
         System.out.println("printing");
         ArffWriter fwriter = new ArffWriter("arfoutput.arff");
         fwriter.writeObjects(objects);
-         */
+*/
     }
 
 
-    }
+}
 

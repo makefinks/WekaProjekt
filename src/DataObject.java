@@ -29,6 +29,15 @@ public class DataObject {
 
     private double avgSpecialCharacters;
 
+
+    private int AtheismCalCount;
+
+    private int GraphicsCalCount;
+
+    private int ReligionCalCount;
+
+    private int SpaceCalCount;
+
     public static ArrayList<Pair> atts = new ArrayList<>();
 
     static {
@@ -157,6 +166,38 @@ public class DataObject {
     public double getAvgSpecialCharacters() {
         return avgSpecialCharacters;
     }
+    public int getAtheismCalCount() {
+        return AtheismCalCount;
+    }
+
+    public void setAtheismCalCount(int atheismCalCount) {
+        AtheismCalCount = atheismCalCount;
+    }
+
+    public int getGraphicsCalCount() {
+        return GraphicsCalCount;
+    }
+
+    public void setGraphicsCalCount(int graphicsCalCount) {
+        GraphicsCalCount = graphicsCalCount;
+    }
+
+    public int getReligionCalCount() {
+        return ReligionCalCount;
+    }
+
+    public void setReligionCalCount(int religionCalCount) {
+        ReligionCalCount = religionCalCount;
+    }
+
+    public int getSpaceCalCount() {
+        return SpaceCalCount;
+    }
+
+    public void setSpaceCalCount(int spaceCalCount) {
+        SpaceCalCount = spaceCalCount;
+    }
+
 
     @Override
     public String toString() {
