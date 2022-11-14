@@ -73,27 +73,12 @@ public class AttributeAnalyser {
         return (int) nrMatcher.results().count();
     }*/
 
-    private void deleteLeerTexte(String text) {
-        String inputFileName = text;
-        String outputFileName = "NewText.txt";
-
-        try (BufferedReader inputFile = new BufferedReader(new FileReader(inputFileName));
-             PrintWriter outputFile = new PrintWriter(new FileWriter(outputFileName)))
-        {
-
-            String lineOfText = null;
-            while ((lineOfText = inputFile.readLine()) != null) {
-                lineOfText = lineOfText.trim();
-                if (!lineOfText.isEmpty()) {
-                    outputFile.print(lineOfText);
-                }
-            }
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    private void deleteEmptyText(){
+       for (DataObject obj: data){
+           if(obj.getText().isEmpty()){
+               data.remove(obj);
+           }
+       }
     }
 
     private double countAverageWordLength(String text){
