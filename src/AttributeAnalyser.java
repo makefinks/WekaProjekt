@@ -22,7 +22,7 @@ public class AttributeAnalyser {
         wc.calculate();
         data.forEach((object) -> {
             String text = object.getText();
-            object.setAverageSentenceLength(averageSentenceLength(text));
+            //object.setAverageSentenceLength(averageSentenceLength(text));
             int sCharCount = countRegexMatches(text, "[^A-Za-z0-9\s]");
             object.setSpecialCharacterCount(sCharCount);
 
@@ -30,6 +30,7 @@ public class AttributeAnalyser {
             object.setAvgSpecialCharacters(avgSpecialCharacters);
             avgSpecialCharacters=avgSpecialCharacters-(avgSpecialCharacters%0.01);
 
+            keyWordCalculation(object);
             object.setNumberCount(countRegexMatches(text, "[0-9]"));
             //email regex inspiration
             // https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
@@ -183,6 +184,6 @@ public class AttributeAnalyser {
         obj.setGraphicsCalCount(count1);
         obj.setSpaceCalCount(count2);
         obj.setReligionCalCount(count3);
-
+        System.out.println("zaehlung");
     }
 }

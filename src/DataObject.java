@@ -52,6 +52,11 @@ public class DataObject {
         atts.add(new Pair("specialCharacterCount", "numeric"));
         atts.add(new Pair("numberCount", "numeric"));
         atts.add(new Pair("emailCount", "numeric"));
+        atts.add(new Pair("atheismCalCount","numeric"));
+        atts.add(new Pair("graphicsCalCount","numeric"));
+        atts.add(new Pair("spaceCalCount","numeric"));
+        atts.add(new Pair("religionCalCount","numeric"));
+
         atts.add(new Pair("groupId", "{'Atheism', 'Graphics', 'Space', 'Religion'}"));
         atts.add(new Pair("avgSpecialCharacters", "numeric"));
     }
@@ -214,6 +219,10 @@ public class DataObject {
                 ", specialCharacterCount=" + specialCharacterCount +
                 ", numberCount=" + numberCount +
                 ", emailCount=" + emailCount +
+                ", atheismCalCount=" +this.AtheismCalCount +
+                ", graphicsCalCount=" +this.GraphicsCalCount +
+                ", spaceCalCount=" +this.SpaceCalCount +
+                ", reigionCalCount=" +this.ReligionCalCount +
                 '}';
     }
 }

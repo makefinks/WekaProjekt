@@ -52,10 +52,12 @@ public class WordCalculation {
         Iterator i=mapOfAllWords.keySet().iterator();
         while(i.hasNext()){
             String word=(String)i.next();
+
             int g1=0,g2=0,g3=0,g0=0;
             double p0,p1,p2,p3;
             int sum=mapOfAllWords.get(word);
             if(sum<=minimalCount){
+
                 if(allWords.get(0).containsKey(word)){
                     g0=allWords.get(0).get(word);
                 }
@@ -89,5 +91,6 @@ public class WordCalculation {
                 }
             }
         }
+        System.out.println("word calculation fertig");
     }
 }
