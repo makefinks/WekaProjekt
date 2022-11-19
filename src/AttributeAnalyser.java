@@ -149,7 +149,7 @@ public class AttributeAnalyser {
     }
     private void keyWordCalculation(DataObject obj){
         int count0=0,count1=0,count2=0,count3=0;
-        String[] words=obj.getText().split(" ");
+        String[] words=obj.getText().toLowerCase().split("\\W+");
         for(int i=0;i<words.length;i++){
             String word=words[i];
             if(wc.getListOfGroup(0).contains(word)){
