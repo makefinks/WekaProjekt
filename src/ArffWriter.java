@@ -44,6 +44,7 @@ public class ArffWriter {
                     + obj.getReligionCount()            + ","
                     + obj.getTextLength()               + ","
                     + obj.getAverageSentenceLength()    + ","
+                    + obj.getAverageWordLength()        + ","
                     + obj.getSpecialCharacterCount()    + ","
                     + obj.getNumberCount()              + ","
                     + obj.getEmailCount()               + ","

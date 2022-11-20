@@ -21,6 +21,8 @@ public class DataObject {
 
     private double averageSentenceLength;
 
+    private double averageWordLength;
+
     private long specialCharacterCount;
 
     private int numberCount;
@@ -28,7 +30,6 @@ public class DataObject {
     private int emailCount;
 
     private double avgSpecialCharacters;
-
 
     private int AtheismCalCount;
 
@@ -49,6 +50,7 @@ public class DataObject {
         atts.add(new Pair("religionCount", "numeric"));
         atts.add(new Pair("textLength", "numeric"));
         atts.add(new Pair("averageSentenceLength", "numeric"));
+        atts.add(new Pair("averageWordLength", "numeric"));
         atts.add(new Pair("specialCharacterCount", "numeric"));
         atts.add(new Pair("numberCount", "numeric"));
         atts.add(new Pair("emailCount", "numeric"));
@@ -203,6 +205,13 @@ public class DataObject {
         SpaceCalCount = spaceCalCount;
     }
 
+    public double getAverageWordLength() {
+        return averageWordLength;
+    }
+
+    public void setAverageWordLength(double averageWordLength) {
+        this.averageWordLength = averageWordLength;
+    }
 
     @Override
     public String toString() {
@@ -216,6 +225,7 @@ public class DataObject {
                 ", SpaceCount=" + SpaceCount +
                 ", textLength=" + textLength +
                 ", averageSentenceLength=" + averageSentenceLength +
+                ", averageWordLength=" + averageWordLength +
                 ", specialCharacterCount=" + specialCharacterCount +
                 ", numberCount=" + numberCount +
                 ", emailCount=" + emailCount +

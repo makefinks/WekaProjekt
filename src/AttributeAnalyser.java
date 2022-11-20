@@ -23,6 +23,7 @@ public class AttributeAnalyser {
         data.forEach((object) -> {
             String text = object.getText();
             //object.setAverageSentenceLength(averageSentenceLength(text));
+            object.setAverageWordLength(countAverageWordLength(text));
             int sCharCount = countRegexMatches(text, "[^A-Za-z0-9\s]");
             object.setSpecialCharacterCount(sCharCount);
 
