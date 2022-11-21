@@ -39,6 +39,8 @@ public class DataObject {
 
     private int SpaceCalCount;
 
+    private int countQuestionMark;
+
     public static ArrayList<Pair> atts = new ArrayList<>();
 
     static {
@@ -51,6 +53,7 @@ public class DataObject {
         atts.add(new Pair("textLength", "numeric"));
         atts.add(new Pair("averageSentenceLength", "numeric"));
         atts.add(new Pair("averageWordLength", "numeric"));
+        atts.add(new Pair("countQuestionMark","numeric"));
         atts.add(new Pair("specialCharacterCount", "numeric"));
         atts.add(new Pair("numberCount", "numeric"));
         atts.add(new Pair("emailCount", "numeric"));
@@ -60,7 +63,6 @@ public class DataObject {
         atts.add(new Pair("spaceCalCount","numeric"));
         atts.add(new Pair("religionCalCount","numeric"));
         atts.add(new Pair("groupId", "{'Atheism', 'Graphics', 'Space', 'Religion'}"));
-
     }
 
     //possible new Attributes -> see Attribute Ideas
@@ -213,6 +215,15 @@ public class DataObject {
         this.averageWordLength = averageWordLength;
     }
 
+    public int getCountQuestionMark() {
+        return countQuestionMark;
+    }
+
+    public void setCountQuestionMark(int countQuestionMark) {
+        this.countQuestionMark = countQuestionMark;
+    }
+
+
     @Override
     public String toString() {
         return "DataObject{" +
@@ -227,6 +238,7 @@ public class DataObject {
                 ", averageSentenceLength=" + averageSentenceLength +
                 ", averageWordLength=" + averageWordLength +
                 ", specialCharacterCount=" + specialCharacterCount +
+                ", countQuestionMark="+ countQuestionMark +
                 ", numberCount=" + numberCount +
                 ", emailCount=" + emailCount +
                 ", atheismCalCount=" +this.AtheismCalCount +

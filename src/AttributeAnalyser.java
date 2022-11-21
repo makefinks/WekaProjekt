@@ -17,6 +17,8 @@ public class AttributeAnalyser {
     }
 
 
+
+
     public void execute() throws IOException {
         wc.init(data);
         wc.calculate();
@@ -32,6 +34,7 @@ public class AttributeAnalyser {
             avgSpecialCharacters=avgSpecialCharacters-(avgSpecialCharacters%0.01);
 
             keyWordCalculation(object);
+            object.setCountQuestionMark(countRegexMatches(text,"[^.!?]+\\?"));
             object.setNumberCount(countRegexMatches(text, "[0-9]"));
             //email regex inspiration
             // https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
@@ -101,6 +104,7 @@ public class AttributeAnalyser {
         }
         return average;
     }
+
 
     private void setKeyWordCount() throws IOException {
 

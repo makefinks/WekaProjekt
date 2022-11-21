@@ -46,6 +46,7 @@ public class ArffWriter {
                     + obj.getAverageSentenceLength()    + ","
                     + obj.getAverageWordLength()        + ","
                     + obj.getSpecialCharacterCount()    + ","
+                    + obj.getCountQuestionMark()        + ","
                     + obj.getNumberCount()              + ","
                     + obj.getEmailCount()               + ","
                     + obj.getAvgSpecialCharacters()     + ","
