@@ -47,6 +47,7 @@ public class ArffWriter {
                     + obj.getSpecialCharacterCount()    + ","
                     + obj.getCountQuestionMark()        + ","
                     + obj.getPersonalExpression()       + ","
+                    + obj.getExclamationMark()          + ","
                     + obj.getNumberCount()              + ","
                     + obj.getEmailCount()               + ","
                     + obj.getAvgSpecialCharacters()     + ","

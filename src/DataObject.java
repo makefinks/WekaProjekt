@@ -39,6 +39,7 @@ public class DataObject {
 
 
 
+    private int exclamationMark;
     private int personalExpression;
 
     private int countQuestionMark;
@@ -56,6 +57,7 @@ public class DataObject {
         atts.add(new Pair("averageSentenceLength", "numeric"));
         atts.add(new Pair("countQuestionMark","numeric"));
         atts.add(new Pair("PersonalExpression","numeric"));
+        atts.add(new Pair("exclamationMark","numeric"));
         atts.add(new Pair("specialCharacterCount", "numeric"));
         atts.add(new Pair("numberCount", "numeric"));
         atts.add(new Pair("emailCount", "numeric"));
@@ -74,7 +76,13 @@ public class DataObject {
         this.groupId = groupId;
         textLength = text.length();
     }
+  public int getExclamationMark() {
+        return exclamationMark;
+    }
 
+    public void setExclamationMark(int exclamationMark) {
+        this.exclamationMark = exclamationMark;
+    }
     public int getPersonalExpression() {
         return personalExpression;
     }
@@ -241,6 +249,7 @@ public class DataObject {
                 ", specialCharacterCount=" + specialCharacterCount +
                 ", countQuestionMark="+ countQuestionMark +
                 ",personalExpression="+personalExpression+
+                ",exclamationMark="+exclamationMark+
                 ", numberCount=" + numberCount +
                 ", emailCount=" + emailCount +
                 ", atheismCalCount=" +this.AtheismCalCount +

@@ -17,8 +17,6 @@ public class AttributeAnalyser {
     }
 
 
-
-
     public void execute() throws IOException {
         wc.init(data);
         wc.calculate();
@@ -34,7 +32,9 @@ public class AttributeAnalyser {
             avgSpecialCharacters=avgSpecialCharacters-(avgSpecialCharacters%0.01);
 
             keyWordCalculation(object);
-            object.setCountQuestionMark(countRegexMatches(text,"[^.!?]+\\?"));
+            object.setCountQuestionMark(countRegexMatches(text,"\\w+(?:\\s+\\w+)*\\s*\\?"));
+            object.setExclamationMark(countRegexMatches(text,"\\w+(?:\\s+\\w+)*\\s*\\!"));
+
             object.setNumberCount(countRegexMatches(text, "[0-9]"));
             //email regex inspiration
             // https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
@@ -99,7 +99,15 @@ public static int countPersonalExpression(String t) {
 		wordList.add("our");
 		wordList.add("we");
 		wordList.add("us");
-
+		wordList.add("My");
+		wordList.add("Me");
+		wordList.add("Our");
+		wordList.add("We");
+		wordList.add("Us");
+        wordList.add("ours");
+		wordList.add("mine");
+        wordList.add("myself");
+		wordList.add("ourselves");
 		int count=0;
 		for(String word:wordList) {
 			for(int i=0;i<textWords.length;i++) {
