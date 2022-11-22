@@ -29,6 +29,20 @@ public class DataObject {
 
     private double avgSpecialCharacters;
 
+    private int timeCount;
+
+    private int dateCount;
+
+    private int moneyCount;
+
+    private int phoneNumberCount;
+
+    private int urlCount;
+
+    private int ipCount;
+
+    private int storageUnitsCount;
+
     private int AtheismCalCount;
 
     private int GraphicsCalCount;
@@ -37,9 +51,8 @@ public class DataObject {
 
     private int SpaceCalCount;
 
-
-
     private int exclamationMark;
+
     private int personalExpression;
 
     private int countQuestionMark;
@@ -66,7 +79,15 @@ public class DataObject {
         atts.add(new Pair("graphicsCalCount","numeric"));
         atts.add(new Pair("spaceCalCount","numeric"));
         atts.add(new Pair("religionCalCount","numeric"));
+        atts.add(new Pair("dateCount", "numeric"));
+        atts.add(new Pair("timeCount", "numeric"));
+        atts.add(new Pair("moneyCount","numeric"));
+        atts.add(new Pair("phoneNumberCount", "numeric"));
+        atts.add(new Pair("urlCount", "numeric"));
+        atts.add(new Pair("ipCount", "numeric"));
+        atts.add(new Pair("storageUnitsCount", "numeric"));
         atts.add(new Pair("groupId", "{'Atheism', 'Graphics', 'Space', 'Religion'}"));
+
     }
 
     //possible new Attributes -> see Attribute Ideas
@@ -233,6 +254,61 @@ public class DataObject {
         this.countQuestionMark = countQuestionMark;
     }
 
+    public int getTimeCount() {
+        return timeCount;
+    }
+
+    public void setTimeCount(int timeCount) {
+        this.timeCount = timeCount;
+    }
+
+    public int getDateCount() {
+        return dateCount;
+    }
+
+    public void setDateCount(int dateCount) {
+        this.dateCount = dateCount;
+    }
+
+    public int getMoneyCount() {
+        return moneyCount;
+    }
+
+    public void setMoneyCount(int moneyCount) {
+        this.moneyCount = moneyCount;
+    }
+
+    public int getPhoneNumberCount() {
+        return phoneNumberCount;
+    }
+
+    public void setPhoneNumberCount(int phoneNumberCount) {
+        this.phoneNumberCount = phoneNumberCount;
+    }
+
+    public int getUrlCount() {
+        return urlCount;
+    }
+
+    public void setUrlCount(int urlCount) {
+        this.urlCount = urlCount;
+    }
+
+    public int getIpCount() {
+        return ipCount;
+    }
+
+    public void setIpCount(int ipCount) {
+        this.ipCount = ipCount;
+    }
+
+    public int getStorageUnitsCount() {
+        return storageUnitsCount;
+    }
+
+    public void setStorageUnitsCount(int storageUnitsCount) {
+        this.storageUnitsCount = storageUnitsCount;
+    }
 
     @Override
     public String toString() {
@@ -248,14 +324,21 @@ public class DataObject {
                 ", averageSentenceLength=" + averageSentenceLength +
                 ", specialCharacterCount=" + specialCharacterCount +
                 ", countQuestionMark="+ countQuestionMark +
-                ",personalExpression="+personalExpression+
-                ",exclamationMark="+exclamationMark+
+                ", personalExpression="+personalExpression+
+                ", exclamationMark="+exclamationMark+
                 ", numberCount=" + numberCount +
                 ", emailCount=" + emailCount +
                 ", atheismCalCount=" +this.AtheismCalCount +
                 ", graphicsCalCount=" +this.GraphicsCalCount +
                 ", spaceCalCount=" +this.SpaceCalCount +
                 ", reigionCalCount=" +this.ReligionCalCount +
+                ", timeCount=" + getTimeCount() +
+                ", dateCount=" + getDateCount() +
+                ", moneyCount=" + getMoneyCount() +
+                ", phoneNumberCount=" + getPhoneNumberCount() +
+                ", urlCount=" + getUrlCount() +
+                ", ipCount=" + getIpCount() +
+                ", storageUnitsCount=" + getStorageUnitsCount() +
                 '}';
     }
 }
