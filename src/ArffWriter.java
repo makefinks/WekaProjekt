@@ -52,6 +52,13 @@ public class ArffWriter {
                     + obj.getGraphicsCalCount()         + ","
                     + obj.getSpaceCalCount()            + ","
                     + obj.getReligionCalCount()         + ","
+                    + obj.getTimeCount()                + ","
+                    + obj.getDateCount()                + ","
+                    + obj.getMoneyCount()               + ","
+                    + obj.getUrlCount()                 + ","
+                    + obj.getPhoneNumberCount()         + ","
+                    + obj.getIpCount()                  + ","
+                    + obj.getStorageUnitsCount()        + ","
                     + group                             + "\n"
 
             );
