@@ -2,6 +2,7 @@ import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.*;
 
 public class AttributeAnalyser {
 
@@ -55,6 +56,14 @@ public class AttributeAnalyser {
             .compile("\\d+\\s?(bytes?|kilobytes?|megabytes?|gigabytes?|terabytes?|kb|mb|gb|tb)",
                     Pattern.CASE_INSENSITIVE | Pattern.MULTILINE)
             .matcher("");
+    private final Matcher MATCHER_QUESTION_MARK = Pattern
+            .compile("\\w+(?:\\s+\\w+)*\\s*\\?",
+            Pattern.CASE_INSENSITIVE | Pattern.MULTILINE)
+            .matcher("");
+    private final Matcher MATCHER_EXCLAMATION_MARK = Pattern
+            .compile("\\w+(?:\\s+\\w+)*\\s*\\!",
+                    Pattern.CASE_INSENSITIVE | Pattern.MULTILINE)
+            .matcher("");
     List<String> fNames = Arrays.asList("Atheism", "Graphics", "Religion", "Space");
 
     public AttributeAnalyser(List<DataObject> data) throws IOException {
@@ -71,12 +80,15 @@ public class AttributeAnalyser {
             //object.setAverageSentenceLength(averageSentenceLength(text));
             int sCharCount = countRegexMatches(text, MATCHER_SPECIAL_CHAR_COUNT);
             object.setSpecialCharacterCount(sCharCount);
+            object.setPersonalExpression(countPersonalExpression(text));
 
             double avgSpecialCharacters = avgSpecialCharacters(text, sCharCount);
             object.setAvgSpecialCharacters(avgSpecialCharacters);
             avgSpecialCharacters=avgSpecialCharacters-(avgSpecialCharacters%0.01);
 
             keyWordCalculation(object);
+            object.setCountQuestionMark(countRegexMatches(text, MATCHER_QUESTION_MARK));
+            object.setExclamationMark(countRegexMatches(text, MATCHER_EXCLAMATION_MARK));
             object.setNumberCount(countRegexMatches(text, MATCHER_NUMBER_COUNT));
             //email regex inspiration
             // https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
@@ -118,44 +130,42 @@ public class AttributeAnalyser {
         return (int) nrMatcher.results().count();
     }*/
 
-    private void deleteLeerTexte(String text) {
-        String inputFileName = text;
-        String outputFileName = "NewText.txt";
-
-        try (BufferedReader inputFile = new BufferedReader(new FileReader(inputFileName));
-             PrintWriter outputFile = new PrintWriter(new FileWriter(outputFileName)))
-        {
-
-            String lineOfText = null;
-            while ((lineOfText = inputFile.readLine()) != null) {
-                lineOfText = lineOfText.trim();
-                if (!lineOfText.isEmpty()) {
-                    outputFile.print(lineOfText);
-                }
-            }
-
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    private void deleteEmptyText(){
+       for (DataObject obj: data){
+           if(obj.getText().isEmpty()){
+               data.remove(obj);
+           }
+       }
     }
 
-    private double countAverageWordLength(String text){
-        int count = 0;
-        double sum = 0;
-        String[] words = text.split("\\s+");
-        for (String word : words) {
-           double wordLength = word.length();
-           sum += wordLength;
-           count++;
-        }
-        double average = 0;
-        if (count > 0) {
-            average = sum / count;
-        }
-        return average;
-    }
+public static int countPersonalExpression(String t) {
+		String [] textWords=t.split("\\s");
+		ArrayList<String> wordList=new ArrayList();
+		wordList.add("I");
+		wordList.add("my");
+		wordList.add("me");
+		wordList.add("our");
+		wordList.add("we");
+		wordList.add("us");
+		wordList.add("My");
+		wordList.add("Me");
+		wordList.add("Our");
+		wordList.add("We");
+		wordList.add("Us");
+        wordList.add("ours");
+		wordList.add("mine");
+        wordList.add("myself");
+		wordList.add("ourselves");
+		int count=0;
+		for(String word:wordList) {
+			for(int i=0;i<textWords.length;i++) {
+				if(textWords[i].equals(word)) {
+					count++;
+				}
+			}
+		}
+		return count;
+		}
 
     private void setKeyWordCount() throws IOException {
 
@@ -205,7 +215,7 @@ public class AttributeAnalyser {
     }
     private void keyWordCalculation(DataObject obj){
         int count0=0,count1=0,count2=0,count3=0;
-        String[] words=obj.getText().split(" ");
+        String[] words=obj.getText().toLowerCase().split("\\W+");
         for(int i=0;i<words.length;i++){
             String word=words[i];
             if(wc.getListOfGroup(0).contains(word)){

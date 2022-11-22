@@ -43,7 +43,6 @@ public class DataObject {
 
     private int storageUnitsCount;
 
-
     private int AtheismCalCount;
 
     private int GraphicsCalCount;
@@ -51,6 +50,12 @@ public class DataObject {
     private int ReligionCalCount;
 
     private int SpaceCalCount;
+
+    private int exclamationMark;
+
+    private int personalExpression;
+
+    private int countQuestionMark;
 
     public static ArrayList<Pair> atts = new ArrayList<>();
 
@@ -63,6 +68,9 @@ public class DataObject {
         atts.add(new Pair("religionCount", "numeric"));
         atts.add(new Pair("textLength", "numeric"));
         atts.add(new Pair("averageSentenceLength", "numeric"));
+        atts.add(new Pair("countQuestionMark","numeric"));
+        atts.add(new Pair("PersonalExpression","numeric"));
+        atts.add(new Pair("exclamationMark","numeric"));
         atts.add(new Pair("specialCharacterCount", "numeric"));
         atts.add(new Pair("numberCount", "numeric"));
         atts.add(new Pair("emailCount", "numeric"));
@@ -88,6 +96,20 @@ public class DataObject {
         this.text = text;
         this.groupId = groupId;
         textLength = text.length();
+    }
+  public int getExclamationMark() {
+        return exclamationMark;
+    }
+
+    public void setExclamationMark(int exclamationMark) {
+        this.exclamationMark = exclamationMark;
+    }
+    public int getPersonalExpression() {
+        return personalExpression;
+    }
+
+    public void setPersonalExpression(int personalExpression) {
+        this.personalExpression = personalExpression;
     }
 
     public int getId() {
@@ -224,6 +246,14 @@ public class DataObject {
         SpaceCalCount = spaceCalCount;
     }
 
+    public int getCountQuestionMark() {
+        return countQuestionMark;
+    }
+
+    public void setCountQuestionMark(int countQuestionMark) {
+        this.countQuestionMark = countQuestionMark;
+    }
+
     public int getTimeCount() {
         return timeCount;
     }
@@ -293,6 +323,9 @@ public class DataObject {
                 ", textLength=" + textLength +
                 ", averageSentenceLength=" + averageSentenceLength +
                 ", specialCharacterCount=" + specialCharacterCount +
+                ", countQuestionMark="+ countQuestionMark +
+                ", personalExpression="+personalExpression+
+                ", exclamationMark="+exclamationMark+
                 ", numberCount=" + numberCount +
                 ", emailCount=" + emailCount +
                 ", atheismCalCount=" +this.AtheismCalCount +

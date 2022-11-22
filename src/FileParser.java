@@ -203,12 +203,14 @@ public class FileParser {
             ArrayList<String> allWords = new ArrayList<>();
             for(DataObject obj : parsedObjects){
                 if(obj.getGroupId() == groupid){
-                String objText = obj.getText();
-                allWords.addAll(List.of(objText.split(" ")));
+                    String objText = obj.getText().toLowerCase();
+                    allWords.addAll(List.of(objText.split("\\W+")));
                 }
             }
-
+            // Remove empty words
             allWords.removeIf(""::equals);
+            // Remove numbers
+            allWords.removeIf("\\d+"::equals);
 
             HashMap<String, Integer> countMap = new HashMap<>();
             for(String s : allWords){
