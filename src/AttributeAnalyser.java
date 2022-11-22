@@ -25,9 +25,9 @@ public class AttributeAnalyser {
         data.forEach((object) -> {
             String text = object.getText();
             //object.setAverageSentenceLength(averageSentenceLength(text));
-            object.setAverageWordLength(countAverageWordLength(text));
             int sCharCount = countRegexMatches(text, "[^A-Za-z0-9\s]");
             object.setSpecialCharacterCount(sCharCount);
+            object.setPersonalExpression(countPersonalExpression(text));
 
             double avgSpecialCharacters = avgSpecialCharacters(text, sCharCount);
             object.setAvgSpecialCharacters(avgSpecialCharacters);
@@ -89,22 +89,27 @@ public class AttributeAnalyser {
        }
     }
 
-    private double countAverageWordLength(String text){
-        int count = 0;
-        double sum = 0;
-        String[] words = text.split("\\s+");
-        for (String word : words) {
-           double wordLength = word.length();
-           sum += wordLength;
-           count++;
-        }
-        double average = 0;
-        if (count > 0) {
-            average = sum / count;
-        }
-        return average;
-    }
 
+public static int countPersonalExpression(String t) {
+		String [] textWords=t.split("\\s");
+		ArrayList<String> wordList=new ArrayList();
+		wordList.add("I");
+		wordList.add("my");
+		wordList.add("me");
+		wordList.add("our");
+		wordList.add("we");
+		wordList.add("us");
+
+		int count=0;
+		for(String word:wordList) {
+			for(int i=0;i<textWords.length;i++) {
+				if(textWords[i].equals(word)) {
+					count++;
+				}
+			}
+		}
+		return count;
+		}
 
     private void setKeyWordCount() throws IOException {
 

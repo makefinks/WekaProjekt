@@ -21,8 +21,6 @@ public class DataObject {
 
     private double averageSentenceLength;
 
-    private double averageWordLength;
-
     private long specialCharacterCount;
 
     private int numberCount;
@@ -39,6 +37,10 @@ public class DataObject {
 
     private int SpaceCalCount;
 
+
+
+    private int personalExpression;
+
     private int countQuestionMark;
 
     public static ArrayList<Pair> atts = new ArrayList<>();
@@ -52,8 +54,8 @@ public class DataObject {
         atts.add(new Pair("religionCount", "numeric"));
         atts.add(new Pair("textLength", "numeric"));
         atts.add(new Pair("averageSentenceLength", "numeric"));
-        atts.add(new Pair("averageWordLength", "numeric"));
         atts.add(new Pair("countQuestionMark","numeric"));
+        atts.add(new Pair("PersonalExpression","numeric"));
         atts.add(new Pair("specialCharacterCount", "numeric"));
         atts.add(new Pair("numberCount", "numeric"));
         atts.add(new Pair("emailCount", "numeric"));
@@ -71,6 +73,14 @@ public class DataObject {
         this.text = text;
         this.groupId = groupId;
         textLength = text.length();
+    }
+
+    public int getPersonalExpression() {
+        return personalExpression;
+    }
+
+    public void setPersonalExpression(int personalExpression) {
+        this.personalExpression = personalExpression;
     }
 
     public int getId() {
@@ -207,14 +217,6 @@ public class DataObject {
         SpaceCalCount = spaceCalCount;
     }
 
-    public double getAverageWordLength() {
-        return averageWordLength;
-    }
-
-    public void setAverageWordLength(double averageWordLength) {
-        this.averageWordLength = averageWordLength;
-    }
-
     public int getCountQuestionMark() {
         return countQuestionMark;
     }
@@ -236,9 +238,9 @@ public class DataObject {
                 ", SpaceCount=" + SpaceCount +
                 ", textLength=" + textLength +
                 ", averageSentenceLength=" + averageSentenceLength +
-                ", averageWordLength=" + averageWordLength +
                 ", specialCharacterCount=" + specialCharacterCount +
                 ", countQuestionMark="+ countQuestionMark +
+                ",personalExpression="+personalExpression+
                 ", numberCount=" + numberCount +
                 ", emailCount=" + emailCount +
                 ", atheismCalCount=" +this.AtheismCalCount +
