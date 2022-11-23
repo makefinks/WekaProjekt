@@ -9,6 +9,61 @@ public class AttributeAnalyser {
     private ArrayList<DataObject> data;
     WordCalculation wc=new WordCalculation();
 
+    private final Matcher MATCHER_AVG_SENTENCELENGTH = Pattern
+            .compile(".+?(\\.|\\n|\\r|\\?|!|:|;)\\s"
+                    , Pattern.CASE_INSENSITIVE)
+            .matcher("");
+    private final Matcher MATCHER_SPECIAL_CHAR_COUNT = Pattern
+            .compile("[^A-Za-z0-9\s]",
+                    Pattern.CASE_INSENSITIVE | Pattern.MULTILINE)
+            .matcher("");
+    private final Matcher MATCHER_NUMBER_COUNT = Pattern
+            .compile("[0-9]",
+                    Pattern.MULTILINE)
+            .matcher("");
+    private final Matcher MATCHER_TIME_COUNT = Pattern
+            .compile("([0-6][0-9]:[0-6][0-9].[0-9]\\s|((1|0)[0-9]|" +
+                    "2[0-4])(:[0-6][0-9]){1,2}\\s|\\s\\d+\\s?(" +
+                    "hours|h|minutes|min|seconds|s|milliseconds|ms|nanoseconds|ns)\\s)",
+                    Pattern.CASE_INSENSITIVE | Pattern.MULTILINE)
+            .matcher("");
+    private final Matcher MATCHER_DATE_COUNT = Pattern
+            .compile("((?:((0|[1-2])?[0-9]|3(1|0))?\\s(jan(uary)?|feb(ruary)?|mar(ch)?|" +
+                            "apr(il)?|may|june?|july?|aug(ust)?|sep(tember)?|oct(ober)?|nov(ember)?|" +
+                            "dec(ember)?)\\s(((0|[1-2])?[0-9]|3(1|0)|of)\\s)?([1-2][0-9]{3}|[1-9][0-9])?)|" +
+                            "(?:\\s((((0|[1-2])?[0-9]|3(1|0))(\\.|/|-)(0?[1-9]|1[0-2])(\\.|/|-)" +
+                            "[1-2][0-9]{3}))\\s)(?:\\s(([1-2][0-9]{3}|[1-9][0-9])(\\.|/|-)(0?[1-9]|1[0-2])" +
+                            "(\\.|/|-)((0|[1-2])?[0-9]|3(1|0)))\\s))",
+                    Pattern.CASE_INSENSITIVE | Pattern.MULTILINE)
+            .matcher("");
+    private final Matcher MATCHER_MONEY_COUNT = Pattern
+            .compile("\\$\\d+",
+                    Pattern.MULTILINE)
+            .matcher("");
+    private final Matcher MATCHER_PHONE_NR_COUNT = Pattern
+            .compile("(\\(\\d{3}\\)|\\d{3})(-|\\s)?\\d{3}-\\d{4}",
+                    Pattern.MULTILINE)
+            .matcher("");
+    private final Matcher MATCHER_URL_COUNT = Pattern
+            .compile("(https?|ftp)://([a-z0-9]+?[a-z\\.\\-_0-9]+?)(/([a-z0-9]+[a-z\\.\\-_0-9]+))+",
+                    Pattern.CASE_INSENSITIVE | Pattern.MULTILINE)
+            .matcher("");
+    private final Matcher MATCHER_IP_COUNT = Pattern
+            .compile("(\\s(([0-1]?[0-9]?[1-9]|2?[0-5][1-5])(\\.([0-1]?[0-9]?[1-9]|2?[0-5][1-5])){3})\\s)",
+                    Pattern.CASE_INSENSITIVE | Pattern.MULTILINE)
+            .matcher("");
+    private final Matcher MATCHER_STORAGE_UNITS_COUNT = Pattern
+            .compile("\\d+\\s?(bytes?|kilobytes?|megabytes?|gigabytes?|terabytes?|kb|mb|gb|tb)",
+                    Pattern.CASE_INSENSITIVE | Pattern.MULTILINE)
+            .matcher("");
+    private final Matcher MATCHER_QUESTION_MARK = Pattern
+            .compile("\\w+(?:\\s+\\w+)*\\s*\\?",
+            Pattern.CASE_INSENSITIVE | Pattern.MULTILINE)
+            .matcher("");
+    private final Matcher MATCHER_EXCLAMATION_MARK = Pattern
+            .compile("\\w+(?:\\s+\\w+)*\\s*\\!",
+                    Pattern.CASE_INSENSITIVE | Pattern.MULTILINE)
+            .matcher("");
     List<String> fNames = Arrays.asList("Atheism", "Graphics", "Religion", "Space");
 
     public AttributeAnalyser(List<DataObject> data) throws IOException {
@@ -23,18 +78,21 @@ public class AttributeAnalyser {
         data.forEach((object) -> {
             String text = object.getText();
             //object.setAverageSentenceLength(averageSentenceLength(text));
-            int sCharCount = countRegexMatches(text, "[^A-Za-z0-9\s]");
+            int sCharCount = countRegexMatches(text, MATCHER_SPECIAL_CHAR_COUNT);
             object.setSpecialCharacterCount(sCharCount);
+            object.setPersonalExpression(countPersonalExpression(text));
 
             double avgSpecialCharacters = avgSpecialCharacters(text, sCharCount);
             object.setAvgSpecialCharacters(avgSpecialCharacters);
             avgSpecialCharacters=avgSpecialCharacters-(avgSpecialCharacters%0.01);
 
             keyWordCalculation(object);
-            object.setNumberCount(countRegexMatches(text, "[0-9]"));
+            object.setCountQuestionMark(countRegexMatches(text, MATCHER_QUESTION_MARK));
+            object.setExclamationMark(countRegexMatches(text, MATCHER_EXCLAMATION_MARK));
+            object.setNumberCount(countRegexMatches(text, MATCHER_NUMBER_COUNT));
             //email regex inspiration
             // https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
-            object.setEmailCount(countRegexMatches(text, "[a-z0-9!#$%&'*+\\/=?^_{|}~\\-]+[\\.a-z0-9!#$%&'*+\\/=?^_{|}~\\-]*@[a-z0-9\\-\\[\\]]+[\\.a-z0-9\\-\\[\\]]*"));
+            object.setEmailCount(countRegexMatches(text, MATCHER_AVG_SENTENCELENGTH));
         });
 
 
@@ -42,15 +100,13 @@ public class AttributeAnalyser {
     }
 
     public double averageSentenceLength(String text) {
-        Matcher matcher = Pattern.compile("(\\s(\\.|!|\\?|:)|\\[\\.{1,3}\\]|(Mr|Ms|Mrs)\\.|(\\.|!|\\?|:)[^\\s\\.\\?!:]|\\d\\.|[^.!?:\\n\\r])+(\\.|!|\\?|:|\\n|\\r)",
-                Pattern.CASE_INSENSITIVE)
-                .matcher(text);
+        MATCHER_AVG_SENTENCELENGTH.reset(text);
         double numberOfMatches = 0;
         double lengthOfText = 0;
         //fuer jeden match (satz) die satzlaenge berechnen
         //und addieren
-        while (matcher.find()) {
-            String sentence = matcher.group();
+        while (MATCHER_AVG_SENTENCELENGTH.find()) {
+            String sentence = MATCHER_AVG_SENTENCELENGTH.group();
             if (!sentence.equals("")) {
                 lengthOfText += sentence.length();
                 numberOfMatches++;
@@ -63,11 +119,8 @@ public class AttributeAnalyser {
         return (double) text.length() / charCount;
     }
 
-    private static int countRegexMatches(String text, String regex) {
-        Matcher matcher = Pattern.compile(regex,
-            Pattern.CASE_INSENSITIVE |
-                Pattern.MULTILINE)
-                .matcher(text);
+    private static int countRegexMatches(String text, Matcher matcher) {
+        matcher.reset(text);
         return (int) matcher.results().count();
     }
 
@@ -85,21 +138,34 @@ public class AttributeAnalyser {
        }
     }
 
-    private double countAverageWordLength(String text){
-        int count = 0;
-        double sum = 0;
-        String[] words = text.split("\\s+");
-        for (String word : words) {
-           double wordLength = word.length();
-           sum += wordLength;
-           count++;
-        }
-        double average = 0;
-        if (count > 0) {
-            average = sum / count;
-        }
-        return average;
-    }
+public static int countPersonalExpression(String t) {
+		String [] textWords=t.split("\\s");
+		ArrayList<String> wordList=new ArrayList();
+		wordList.add("I");
+		wordList.add("my");
+		wordList.add("me");
+		wordList.add("our");
+		wordList.add("we");
+		wordList.add("us");
+		wordList.add("My");
+		wordList.add("Me");
+		wordList.add("Our");
+		wordList.add("We");
+		wordList.add("Us");
+        wordList.add("ours");
+		wordList.add("mine");
+        wordList.add("myself");
+		wordList.add("ourselves");
+		int count=0;
+		for(String word:wordList) {
+			for(int i=0;i<textWords.length;i++) {
+				if(textWords[i].equals(word)) {
+					count++;
+				}
+			}
+		}
+		return count;
+		}
 
     private void setKeyWordCount() throws IOException {
 
@@ -149,7 +215,7 @@ public class AttributeAnalyser {
     }
     private void keyWordCalculation(DataObject obj){
         int count0=0,count1=0,count2=0,count3=0;
-        String[] words=obj.getText().split(" ");
+        String[] words=obj.getText().toLowerCase().split("\\W+");
         for(int i=0;i<words.length;i++){
             String word=words[i];
             if(wc.getListOfGroup(0).contains(word)){

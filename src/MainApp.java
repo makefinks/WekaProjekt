@@ -14,10 +14,14 @@ public class MainApp {
         FileParser parser = new FileParser("20newsgroupsTrainingarff.arff");
         ArrayList<DataObject> objects = parser.parseFile();
 
-
-
-
-        parser.createWordLists(50);
+        // User choice: Generate Wordlist for 4 topics, or skip
+        Scanner userInput = new Scanner(System.in);
+        String yesNo = new String("pending");
+        System.out.println("Generate word lists ? Y to generate, any key to skip [Y/N]");
+        yesNo = userInput.nextLine();
+        if(yesNo.equals("Y") | yesNo.equals("y")){
+            parser.createWordLists(50);
+        }
         AttributeAnalyser analyser = new AttributeAnalyser(objects);
         ArffWriter writer = new ArffWriter("arffOutputTraining.arff");
         writer.writeObjects(objects);

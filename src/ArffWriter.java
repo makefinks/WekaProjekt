@@ -44,6 +44,9 @@ public class ArffWriter {
                     + obj.getReligionCount()            + ","
                     + obj.getTextLength()               + ","
                     + obj.getAverageSentenceLength()    + ","
+                    + obj.getCountQuestionMark()        + ","
+                    + obj.getPersonalExpression()       + ","
+                    + obj.getExclamationMark()          + ","
                     + obj.getSpecialCharacterCount()    + ","
                     + obj.getNumberCount()              + ","
                     + obj.getEmailCount()               + ","
@@ -52,6 +55,13 @@ public class ArffWriter {
                     + obj.getGraphicsCalCount()         + ","
                     + obj.getSpaceCalCount()            + ","
                     + obj.getReligionCalCount()         + ","
+                    + obj.getTimeCount()                + ","
+                    + obj.getDateCount()                + ","
+                    + obj.getMoneyCount()               + ","
+                    + obj.getPhoneNumberCount()         + ","
+                    + obj.getUrlCount()                 + ","
+                    + obj.getIpCount()                  + ","
+                    + obj.getStorageUnitsCount()        + ","
                     + group                             + "\n"
 
             );

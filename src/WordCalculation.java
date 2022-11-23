@@ -25,8 +25,8 @@ public class WordCalculation {
     public void init(ArrayList<DataObject> texte){
 
         texte.forEach((ob)-> {
-            String text= ob.getText();
-            String[] words=text.split(" ");
+            String text= ob.getText().toLowerCase();
+            String[] words=text.split("\\W+");
             for(String word:words){
                 HashMap group= allWordsCountByGroup.get(ob.getGroupId());
                if(group.containsKey(word)) {
