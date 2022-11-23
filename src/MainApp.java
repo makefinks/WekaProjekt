@@ -22,6 +22,7 @@ public class MainApp {
         if(yesNo.equals("Y") | yesNo.equals("y")){
             parser.createWordLists(50);
         }
+        
         AttributeAnalyser analyser = new AttributeAnalyser(objects);
         ArffWriter writer = new ArffWriter("arffOutputTraining.arff");
         writer.writeObjects(objects);
