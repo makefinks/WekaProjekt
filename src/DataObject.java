@@ -57,6 +57,8 @@ public class DataObject {
 
     private int countQuestionMark;
 
+    private int NegativeView;
+
     public static ArrayList<Pair> atts = new ArrayList<>();
 
     static {
@@ -71,6 +73,7 @@ public class DataObject {
         atts.add(new Pair("countQuestionMark","numeric"));
         atts.add(new Pair("PersonalExpression","numeric"));
         atts.add(new Pair("exclamationMark","numeric"));
+        atts.add(new Pair("NegativeView","numeric"));
         atts.add(new Pair("specialCharacterCount", "numeric"));
         atts.add(new Pair("numberCount", "numeric"));
         atts.add(new Pair("emailCount", "numeric"));
@@ -254,6 +257,13 @@ public class DataObject {
         this.countQuestionMark = countQuestionMark;
     }
 
+     public int getNegativeView() {
+        return NegativeView;
+    }
+
+    public void setNegativeView(int negativeView) {
+        NegativeView = negativeView;
+    }
     public int getTimeCount() {
         return timeCount;
     }
@@ -326,6 +336,7 @@ public class DataObject {
                 ", countQuestionMark="+ countQuestionMark +
                 ", personalExpression="+personalExpression+
                 ", exclamationMark="+exclamationMark+
+                ", NegativeView="+NegativeView+
                 ", numberCount=" + numberCount +
                 ", emailCount=" + emailCount +
                 ", atheismCalCount=" +this.AtheismCalCount +
