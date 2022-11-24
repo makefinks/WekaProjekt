@@ -75,12 +75,15 @@ public class AttributeAnalyser {
     public void execute() throws IOException {
         wc.init(data);
         wc.calculate();
+        deleteEmptyText();
         data.forEach((object) -> {
             String text = object.getText();
             //object.setAverageSentenceLength(averageSentenceLength(text));
             int sCharCount = countRegexMatches(text, MATCHER_SPECIAL_CHAR_COUNT);
             object.setSpecialCharacterCount(sCharCount);
             object.setPersonalExpression(countPersonalExpression(text));
+            object.setNegativeView(countNegativeViews(text));
+
 
             double avgSpecialCharacters = avgSpecialCharacters(text, sCharCount);
             object.setAvgSpecialCharacters(avgSpecialCharacters);
@@ -139,19 +142,16 @@ public class AttributeAnalyser {
     }
 
 public static int countPersonalExpression(String t) {
-		String [] textWords=t.split("\\s");
+
+        String t1=t.toLowerCase();
+		String [] textWords=t1.split("\\s");
 		ArrayList<String> wordList=new ArrayList();
-		wordList.add("I");
+		wordList.add("i");
 		wordList.add("my");
 		wordList.add("me");
 		wordList.add("our");
 		wordList.add("we");
 		wordList.add("us");
-		wordList.add("My");
-		wordList.add("Me");
-		wordList.add("Our");
-		wordList.add("We");
-		wordList.add("Us");
         wordList.add("ours");
 		wordList.add("mine");
         wordList.add("myself");
@@ -166,6 +166,25 @@ public static int countPersonalExpression(String t) {
 		}
 		return count;
 		}
+
+        public static int countNegativeViews(String t) {
+            String t1=t.toLowerCase();
+            String[] textWords = t1.split("\\s");
+            ArrayList<String> nWords = new ArrayList();
+            nWords.add("no");
+            nWords.add("none");
+            nWords.add("not");
+            int count = 0;
+            for (String word : nWords) {
+                for (int i = 0; i < textWords.length; i++) {
+                    if (textWords[i].equals(word)) {
+                        count++;
+                    }
+                }
+
+            }
+            return count;
+        }
 
     private void setKeyWordCount() throws IOException {
 
