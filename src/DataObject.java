@@ -10,58 +10,34 @@ public class DataObject {
     private String text;
     private int groupId;
     private int AtheismCount;
-
     private int GraphicsCount;
-
     private int ReligionCount;
-
     private int SpaceCount;
-
     private int textLength;
-
     private double averageSentenceLength;
-
     private long specialCharacterCount;
-
     private int numberCount;
-
     private int emailCount;
-
     private double avgSpecialCharacters;
-
     private int timeCount;
-
     private int dateCount;
-
     private int moneyCount;
-
     private int phoneNumberCount;
-
     private int urlCount;
-
     private int ipCount;
-
     private int storageUnitsCount;
-
     private int AtheismCalCount;
-
     private int GraphicsCalCount;
-
     private int ReligionCalCount;
-
     private int SpaceCalCount;
-
     private int exclamationMark;
-
     private int personalExpression;
-
     private int countQuestionMark;
+
 
     public static ArrayList<Pair> atts = new ArrayList<>();
 
     static {
-        atts.add(new Pair("id", "numeric"));
-        atts.add(new Pair("text", "string"));
         atts.add(new Pair("atheismCount", "numeric"));
         atts.add(new Pair("graphicsCount", "numeric"));
         atts.add(new Pair("spaceCount", "numeric"));

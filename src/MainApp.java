@@ -20,7 +20,7 @@ public class MainApp {
         System.out.println("Generate word lists ? Y to generate, any key to skip [Y/N]");
         yesNo = userInput.nextLine();
         if(yesNo.equals("Y") | yesNo.equals("y")){
-            parser.createWordLists(50);
+            parser.createWordLists(10);
         }
         
         AttributeAnalyser analyser = new AttributeAnalyser(objects);
