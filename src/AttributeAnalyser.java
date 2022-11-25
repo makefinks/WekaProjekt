@@ -7,7 +7,7 @@ import java.util.regex.*;
 public class AttributeAnalyser {
 
     private ArrayList<DataObject> data;
-    WordCalculation wc=new WordCalculation();
+    WordCalculation wc=MainApp.wc;
 
     private final Matcher MATCHER_AVG_SENTENCELENGTH = Pattern
             .compile(".+?(\\.|\\n|\\r|\\?|!|:|;)\\s"

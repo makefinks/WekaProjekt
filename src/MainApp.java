@@ -7,13 +7,15 @@ import java.util.regex.Pattern;
 
 public class MainApp {
 
+    static WordCalculation wc=new WordCalculation();
     public static void main(String[] args) throws IOException {
 
         List<String> fNames = Arrays.asList("Atheism", "Graphics", "Religion", "Space");
 
         FileParser parser = new FileParser("traindevtest/train.arff");
         ArrayList<DataObject> objects = parser.parseFile();
-
+        wc.init(objects);
+        wc.calculate();
         // User choice: Generate Wordlist for 4 topics, or skip
         Scanner userInput = new Scanner(System.in);
         String yesNo = new String("pending");
