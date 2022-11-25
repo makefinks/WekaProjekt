@@ -73,8 +73,8 @@ public class AttributeAnalyser {
 
 
     public void execute() throws IOException {
-        wc.init(data);
-        wc.calculate();
+        //wc.init(data);
+        //wc.calculate();
         deleteEmptyText();
         data.forEach((object) -> {
             String text = object.getText();
@@ -89,7 +89,7 @@ public class AttributeAnalyser {
             object.setAvgSpecialCharacters(avgSpecialCharacters);
             avgSpecialCharacters=avgSpecialCharacters-(avgSpecialCharacters%0.01);
 
-            keyWordCalculation(object);
+            //keyWordCalculation(object);
             object.setCountQuestionMark(countRegexMatches(text, MATCHER_QUESTION_MARK));
             object.setExclamationMark(countRegexMatches(text, MATCHER_EXCLAMATION_MARK));
             object.setNumberCount(countRegexMatches(text, MATCHER_NUMBER_COUNT));

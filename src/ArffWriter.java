@@ -46,14 +46,18 @@ public class ArffWriter {
                     + obj.getCountQuestionMark()        + ","
                     + obj.getPersonalExpression()       + ","
                     + obj.getExclamationMark()          + ","
+                    + obj.getNegativeView()             + ","
                     + obj.getSpecialCharacterCount()    + ","
                     + obj.getNumberCount()              + ","
                     + obj.getEmailCount()               + ","
                     + obj.getAvgSpecialCharacters()     + ","
+                            /*
                     + obj.getAtheismCalCount()          + ","
                     + obj.getGraphicsCalCount()         + ","
                     + obj.getSpaceCalCount()            + ","
                     + obj.getReligionCalCount()         + ","
+
+                             */
                     + obj.getDateCount()                + ","
                     + obj.getTimeCount()                + ","
                     + obj.getMoneyCount()               + ","

@@ -53,10 +53,13 @@ public class DataObject {
         atts.add(new Pair("numberCount", "numeric"));
         atts.add(new Pair("emailCount", "numeric"));
         atts.add(new Pair("avgSpecialCharacters", "numeric"));
+        /*
         atts.add(new Pair("atheismCalCount","numeric"));
         atts.add(new Pair("graphicsCalCount","numeric"));
         atts.add(new Pair("spaceCalCount","numeric"));
         atts.add(new Pair("religionCalCount","numeric"));
+
+         */
         atts.add(new Pair("dateCount", "numeric"));
         atts.add(new Pair("timeCount", "numeric"));
         atts.add(new Pair("moneyCount","numeric"));
@@ -200,6 +203,14 @@ public class DataObject {
         AtheismCalCount = atheismCalCount;
     }
 
+    public int getNegativeView() {
+        return NegativeView;
+    }
+
+    public static ArrayList<Pair> getAtts() {
+        return atts;
+    }
+
     public int getGraphicsCalCount() {
         return GraphicsCalCount;
     }
@@ -286,6 +297,14 @@ public class DataObject {
 
     public void setStorageUnitsCount(int storageUnitsCount) {
         this.storageUnitsCount = storageUnitsCount;
+    }
+
+    public void setNegativeView(int negativeView) {
+        NegativeView = negativeView;
+    }
+
+    public static void setAtts(ArrayList<Pair> atts) {
+        DataObject.atts = atts;
     }
 
     @Override
