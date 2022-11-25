@@ -34,6 +34,7 @@ public class DataObject {
     private int personalExpression;
     private int countQuestionMark;
 
+    private int NegativeView;
 
     public static ArrayList<Pair> atts = new ArrayList<>();
 
@@ -47,6 +48,7 @@ public class DataObject {
         atts.add(new Pair("countQuestionMark","numeric"));
         atts.add(new Pair("PersonalExpression","numeric"));
         atts.add(new Pair("exclamationMark","numeric"));
+        atts.add(new Pair("NegativeView","numeric"));
         atts.add(new Pair("specialCharacterCount", "numeric"));
         atts.add(new Pair("numberCount", "numeric"));
         atts.add(new Pair("emailCount", "numeric"));
