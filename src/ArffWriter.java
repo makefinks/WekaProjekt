@@ -36,9 +36,8 @@ public class ArffWriter {
                 case 3 -> "Religion";
                 default -> "";
             };
-            writer.write(obj.getId() + ","
-                    + "'" + obj.getText() +"'"          + ","
-                    + obj.getAtheismCount()             + ","
+            writer.write(
+                    + obj.getAtheismCount()         + ","
                     + obj.getGraphicsCount()            + ","
                     + obj.getSpaceCount()               + ","
                     + obj.getReligionCount()            + ","
@@ -52,10 +51,12 @@ public class ArffWriter {
                     + obj.getNumberCount()              + ","
                     + obj.getEmailCount()               + ","
                     + obj.getAvgSpecialCharacters()     + ","
+                            /*
                     + obj.getAtheismCalCount()          + ","
                     + obj.getGraphicsCalCount()         + ","
                     + obj.getSpaceCalCount()            + ","
                     + obj.getReligionCalCount()         + ","
+                             */
                     + obj.getDateCount()                + ","
                     + obj.getTimeCount()                + ","
                     + obj.getMoneyCount()               + ","

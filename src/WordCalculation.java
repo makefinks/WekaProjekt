@@ -9,6 +9,8 @@ public class WordCalculation {
     HashMap<Integer, ArrayList<String>> wordlistOfGroup = new HashMap<>();
     HashMap<String,Integer> allWordsCount =new HashMap<>();
 
+    HashMap<Integer,Integer> sumOfallWordsByGroup =new HashMap<>();
+
 
     public WordCalculation(){
         allWordsCountByGroup.put(0,new HashMap<>());
@@ -19,6 +21,11 @@ public class WordCalculation {
         wordlistOfGroup.put(1,new ArrayList<>());
         wordlistOfGroup.put(2,new ArrayList<>());
         wordlistOfGroup.put(3,new ArrayList<>());
+        sumOfallWordsByGroup.put(0,0);
+        sumOfallWordsByGroup.put(1,0);
+        sumOfallWordsByGroup.put(2,0);
+        sumOfallWordsByGroup.put(3,0);
+
     }
 
 
@@ -27,6 +34,9 @@ public class WordCalculation {
         texte.forEach((ob)-> {
             String text= ob.getText().toLowerCase();
             String[] words=text.split("\\W+");
+
+            sumOfallWordsByGroup.put(ob.getGroupId(),sumOfallWordsByGroup.get(ob.getGroupId())+words.length);
+
             for(String word:words){
                 HashMap group= allWordsCountByGroup.get(ob.getGroupId());
                if(group.containsKey(word)) {

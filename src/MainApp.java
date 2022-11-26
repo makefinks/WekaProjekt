@@ -7,27 +7,30 @@ import java.util.regex.Pattern;
 
 public class MainApp {
 
+    static WordCalculation wc=new WordCalculation();
     public static void main(String[] args) throws IOException {
 
         List<String> fNames = Arrays.asList("Atheism", "Graphics", "Religion", "Space");
 
-        FileParser parser = new FileParser("20newsgroupsTrainingarff.arff");
+        FileParser parser = new FileParser("traindevtest/train.arff");
         ArrayList<DataObject> objects = parser.parseFile();
-
+        wc.init(objects);
+        wc.calculate();
         // User choice: Generate Wordlist for 4 topics, or skip
         Scanner userInput = new Scanner(System.in);
         String yesNo = new String("pending");
         System.out.println("Generate word lists ? Y to generate, any key to skip [Y/N]");
         yesNo = userInput.nextLine();
         if(yesNo.equals("Y") | yesNo.equals("y")){
-            parser.createWordLists(50);
+            parser.createWordLists(5);
         }
+        
         AttributeAnalyser analyser = new AttributeAnalyser(objects);
         ArffWriter writer = new ArffWriter("arffOutputTraining.arff");
         writer.writeObjects(objects);
 
 
-        FileParser testParser = new FileParser("20newsgroupsTesting.arff");
+        FileParser testParser = new FileParser("traindevtest/dev.arff");
         ArrayList<DataObject> testObjects = testParser.parseFile();
         AttributeAnalyser testAnalyser = new AttributeAnalyser(testObjects);
         ArffWriter testWriter = new ArffWriter("arffOutputTesting.arff");
