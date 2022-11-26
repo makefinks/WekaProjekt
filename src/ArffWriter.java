@@ -37,7 +37,7 @@ public class ArffWriter {
                 default -> "";
             };
             writer.write(
-                    + obj.getAtheismCount()             + ","
+                    + obj.getAtheismCount()         + ","
                     + obj.getGraphicsCount()            + ","
                     + obj.getSpaceCount()               + ","
                     + obj.getReligionCount()            + ","
@@ -56,7 +56,6 @@ public class ArffWriter {
                     + obj.getGraphicsCalCount()         + ","
                     + obj.getSpaceCalCount()            + ","
                     + obj.getReligionCalCount()         + ","
-
                              */
                     + obj.getDateCount()                + ","
                     + obj.getTimeCount()                + ","
