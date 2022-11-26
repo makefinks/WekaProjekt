@@ -73,8 +73,8 @@ public class AttributeAnalyser {
 
 
     public void execute() throws IOException {
-        //wc.init(data);
-        //wc.calculate();
+        wc.init(data);
+        wc.calculate();
         deleteEmptyText();
         data.forEach((object) -> {
             String text = object.getText();
