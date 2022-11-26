@@ -10,51 +10,28 @@ public class DataObject {
     private String text;
     private int groupId;
     private int AtheismCount;
-
     private int GraphicsCount;
-
     private int ReligionCount;
-
     private int SpaceCount;
-
     private int textLength;
-
     private double averageSentenceLength;
-
     private long specialCharacterCount;
-
     private int numberCount;
-
     private int emailCount;
-
     private double avgSpecialCharacters;
-
     private int timeCount;
-
     private int dateCount;
-
     private int moneyCount;
-
     private int phoneNumberCount;
-
     private int urlCount;
-
     private int ipCount;
-
     private int storageUnitsCount;
-
     private int AtheismCalCount;
-
     private int GraphicsCalCount;
-
     private int ReligionCalCount;
-
     private int SpaceCalCount;
-
     private int exclamationMark;
-
     private int personalExpression;
-
     private int countQuestionMark;
 
     private int NegativeView;
@@ -62,8 +39,6 @@ public class DataObject {
     public static ArrayList<Pair> atts = new ArrayList<>();
 
     static {
-        atts.add(new Pair("id", "numeric"));
-        atts.add(new Pair("text", "string"));
         atts.add(new Pair("atheismCount", "numeric"));
         atts.add(new Pair("graphicsCount", "numeric"));
         atts.add(new Pair("spaceCount", "numeric"));
@@ -78,10 +53,13 @@ public class DataObject {
         atts.add(new Pair("numberCount", "numeric"));
         atts.add(new Pair("emailCount", "numeric"));
         atts.add(new Pair("avgSpecialCharacters", "numeric"));
+        /*
         atts.add(new Pair("atheismCalCount","numeric"));
         atts.add(new Pair("graphicsCalCount","numeric"));
         atts.add(new Pair("spaceCalCount","numeric"));
         atts.add(new Pair("religionCalCount","numeric"));
+
+         */
         atts.add(new Pair("dateCount", "numeric"));
         atts.add(new Pair("timeCount", "numeric"));
         atts.add(new Pair("moneyCount","numeric"));
@@ -225,6 +203,14 @@ public class DataObject {
         AtheismCalCount = atheismCalCount;
     }
 
+    public int getNegativeView() {
+        return NegativeView;
+    }
+
+    public static ArrayList<Pair> getAtts() {
+        return atts;
+    }
+
     public int getGraphicsCalCount() {
         return GraphicsCalCount;
     }
@@ -257,13 +243,6 @@ public class DataObject {
         this.countQuestionMark = countQuestionMark;
     }
 
-     public int getNegativeView() {
-        return NegativeView;
-    }
-
-    public void setNegativeView(int negativeView) {
-        NegativeView = negativeView;
-    }
     public int getTimeCount() {
         return timeCount;
     }
@@ -320,6 +299,14 @@ public class DataObject {
         this.storageUnitsCount = storageUnitsCount;
     }
 
+    public void setNegativeView(int negativeView) {
+        NegativeView = negativeView;
+    }
+
+    public static void setAtts(ArrayList<Pair> atts) {
+        DataObject.atts = atts;
+    }
+
     @Override
     public String toString() {
         return "DataObject{" +
@@ -336,7 +323,6 @@ public class DataObject {
                 ", countQuestionMark="+ countQuestionMark +
                 ", personalExpression="+personalExpression+
                 ", exclamationMark="+exclamationMark+
-                ", NegativeView="+NegativeView+
                 ", numberCount=" + numberCount +
                 ", emailCount=" + emailCount +
                 ", atheismCalCount=" +this.AtheismCalCount +

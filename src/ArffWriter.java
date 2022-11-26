@@ -52,10 +52,12 @@ public class ArffWriter {
                     + obj.getNumberCount()              + ","
                     + obj.getEmailCount()               + ","
                     + obj.getAvgSpecialCharacters()     + ","
+                            /*
                     + obj.getAtheismCalCount()          + ","
                     + obj.getGraphicsCalCount()         + ","
                     + obj.getSpaceCalCount()            + ","
                     + obj.getReligionCalCount()         + ","
+                             */
                     + obj.getDateCount()                + ","
                     + obj.getTimeCount()                + ","
                     + obj.getMoneyCount()               + ","
