@@ -1,7 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DataObject {
 
@@ -35,6 +32,13 @@ public class DataObject {
     private int countQuestionMark;
 
     private int NegativeView;
+    private int calcSymbolsCount;
+    private int unitsCount;
+    private double avgUmlauts;
+    private double avgCapital;
+    private double avgLowerCase;
+    private double avgCommonLetters;
+    private double avgLeerzeichen;
 
     public static ArrayList<Pair> atts = new ArrayList<>();
 
@@ -64,6 +68,13 @@ public class DataObject {
         atts.add(new Pair("urlCount", "numeric"));
         atts.add(new Pair("ipCount", "numeric"));
         atts.add(new Pair("storageUnitsCount", "numeric"));
+        atts.add(new Pair("calcSymbolsCount", "numeric"));
+        atts.add(new Pair("unitsCount", "numeric"));
+        atts.add(new Pair("avgUmlauts", "numeric"));
+        atts.add(new Pair("avgCapital", "numeric"));
+        atts.add(new Pair("avgLowerCase", "numeric"));
+        atts.add(new Pair("avgCommonLetters", "numeric"));
+        atts.add(new Pair("avgLeerzeichen", "numeric"));
         atts.add(new Pair("groupId", "{'Atheism', 'Graphics', 'Space', 'Religion'}"));
 
     }
@@ -84,6 +95,62 @@ public class DataObject {
     }
     public int getPersonalExpression() {
         return personalExpression;
+    }
+
+    public int getCalcSymbolsCount() {
+        return calcSymbolsCount;
+    }
+
+    public void setCalcSymbolsCount(int calcSymbolsCount) {
+        this.calcSymbolsCount = calcSymbolsCount;
+    }
+
+    public int getUnitsCount() {
+        return unitsCount;
+    }
+
+    public void setUnitsCount(int unitsCount) {
+        this.unitsCount = unitsCount;
+    }
+
+    public double getAvgUmlauts() {
+        return avgUmlauts;
+    }
+
+    public void setAvgUmlauts(double umlautsCount) {
+        this.avgUmlauts = umlautsCount;
+    }
+
+    public double getAvgCapital() {
+        return avgCapital;
+    }
+
+    public void setAvgCapital(double capitalCount) {
+        this.avgCapital = capitalCount;
+    }
+
+    public double getAvgLowerCase() {
+        return avgLowerCase;
+    }
+
+    public void setAvgLowerCase(double lowerCaseCount) {
+        this.avgLowerCase = lowerCaseCount;
+    }
+
+    public double getAvgCommonLetters() {
+        return avgCommonLetters;
+    }
+
+    public void setAvgCommonLetters(double commonLettersCount) {
+        this.avgCommonLetters = commonLettersCount;
+    }
+
+    public double getAvgLeerzeichen() {
+        return avgLeerzeichen;
+    }
+
+    public void setAvgLeerzeichen(double avgLeerzeichen) {
+        this.avgLeerzeichen = avgLeerzeichen;
     }
 
     public void setPersonalExpression(int personalExpression) {
@@ -333,6 +400,13 @@ public class DataObject {
                 ", urlCount=" + getUrlCount() +
                 ", ipCount=" + getIpCount() +
                 ", storageUnitsCount=" + getStorageUnitsCount() +
+                ", calcSymbolsCount=" + getCalcSymbolsCount() +
+                ", unitsCount=" + getUnitsCount() +
+                ", avgUmlauts=" + getAvgUmlauts() +
+                ", avgCapital=" + getAvgCapital() +
+                ", avgLowerCase=" + getAvgLowerCase() +
+                ", avgCommonLetters=" + getAvgCommonLetters() +
+                ", avgLeerzeichen=" + getAvgLeerzeichen() +
                 '}';
     }
 }

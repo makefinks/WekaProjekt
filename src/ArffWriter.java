@@ -64,6 +64,13 @@ public class ArffWriter {
                     + obj.getUrlCount()                 + ","
                     + obj.getIpCount()                  + ","
                     + obj.getStorageUnitsCount()        + ","
+                    + obj.getCalcSymbolsCount()         + ","
+                    + obj.getUnitsCount()               + ","
+                    + obj.getAvgUmlauts()             + ","
+                    + obj.getAvgCapital()             + ","
+                    + obj.getAvgLowerCase()           + ","
+                    + obj.getAvgCommonLetters()       + ","
+                    + obj.getAvgLeerzeichen()       + ","
                     + group                             + "\n"
 
             );

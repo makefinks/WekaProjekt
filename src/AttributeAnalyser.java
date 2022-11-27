@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.regex.*;
 
 public class AttributeAnalyser {
 
@@ -64,6 +63,50 @@ public class AttributeAnalyser {
             .compile("\\w+(?:\\s+\\w+)*\\s*\\!",
                     Pattern.CASE_INSENSITIVE | Pattern.MULTILINE)
             .matcher("");
+
+    private final Matcher MATCHER_CALC_SYMBOLS_COUNT =  Pattern
+            .compile("[\\^%/()=*+\\-<>]",
+                    Pattern.MULTILINE)
+            .matcher("");
+
+    private final Matcher MATCHER_UNITS_COUNT = Pattern
+            .compile("millimeters|centimeters|meters|kilometers" +
+                    "kilogram|gram|milligram|ampere|volt|ohm|farad" +
+                    "|celsius|fahrenheit")
+            .matcher("");
+
+    private final Matcher MATCHER_UMLAUTS_COUNT = Pattern
+            .compile("[aeiou]",
+                    Pattern.CASE_INSENSITIVE | Pattern.MULTILINE)
+            .matcher("");
+
+    private final Matcher MATCHER_CAPITAL_COUNT = Pattern
+            .compile("[A-Z]",
+                    Pattern.MULTILINE)
+            .matcher("");
+
+    private final Matcher MATCHER_LOWER_CASE_COUNT = Pattern
+            .compile("[a-z]",
+                    Pattern.MULTILINE)
+            .matcher("");
+
+    private final Matcher MATCHER_COMMON_LETTERS_COUNT =  Pattern
+            .compile("[etaionshr]",
+                    Pattern.MULTILINE | Pattern.CASE_INSENSITIVE)
+            .matcher("");
+
+    private final Matcher MATCHER_LEERZEICHEN_COUNT = Pattern
+            .compile("\\s",
+                    Pattern.MULTILINE)
+            .matcher("");
+
+    private final Matcher MATCHER_EMAIL_COUNT = Pattern
+            .compile("([a-z0-9!#$%&'*+/=?^_`{|}~-]+" +
+                    "(\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@" +
+                    "(([a-z0-9]([a-z0-9-]*[a-z0-9])?\\.)+" +
+                    "[a-z0-9]([a-z0-9-]*[a-z0-9])?))",
+                    Pattern.MULTILINE | Pattern.CASE_INSENSITIVE)
+            .matcher("");
     List<String> fNames = Arrays.asList("Atheism", "Graphics", "Religion", "Space");
 
     public AttributeAnalyser(List<DataObject> data) throws IOException {
@@ -78,7 +121,7 @@ public class AttributeAnalyser {
         deleteEmptyText();
         data.forEach((object) -> {
             String text = object.getText();
-            //object.setAverageSentenceLength(averageSentenceLength(text));
+            object.setAverageSentenceLength(averageSentenceLength(text));
             int sCharCount = countRegexMatches(text, MATCHER_SPECIAL_CHAR_COUNT);
             object.setSpecialCharacterCount(sCharCount);
             object.setPersonalExpression(countPersonalExpression(text));
@@ -95,7 +138,21 @@ public class AttributeAnalyser {
             object.setNumberCount(countRegexMatches(text, MATCHER_NUMBER_COUNT));
             //email regex inspiration
             // https://stackoverflow.com/questions/201323/how-can-i-validate-an-email-address-using-a-regular-expression
-            object.setEmailCount(countRegexMatches(text, MATCHER_AVG_SENTENCELENGTH));
+            object.setEmailCount(countRegexMatches(text, MATCHER_EMAIL_COUNT));
+            object.setTimeCount(countRegexMatches(text, MATCHER_TIME_COUNT));
+            object.setDateCount(countRegexMatches(text, MATCHER_DATE_COUNT));
+            object.setMoneyCount(countRegexMatches(text, MATCHER_MONEY_COUNT));
+            object.setPhoneNumberCount(countRegexMatches(text, MATCHER_PHONE_NR_COUNT));
+            object.setUrlCount(countRegexMatches(text, MATCHER_URL_COUNT));
+            object.setIpCount(countRegexMatches(text, MATCHER_IP_COUNT));
+            object.setStorageUnitsCount(countRegexMatches(text, MATCHER_STORAGE_UNITS_COUNT));
+            object.setCalcSymbolsCount(countRegexMatches(text, MATCHER_CALC_SYMBOLS_COUNT));
+            object.setUnitsCount(countRegexMatches(text, MATCHER_UNITS_COUNT));
+            object.setAvgUmlauts((double) countRegexMatches(text, MATCHER_UMLAUTS_COUNT) / object.getTextLength());
+            object.setAvgCapital((double) countRegexMatches(text,MATCHER_CAPITAL_COUNT) / object.getTextLength());
+            object.setAvgLowerCase((double) countRegexMatches(text,MATCHER_LOWER_CASE_COUNT) / object.getTextLength());
+            object.setAvgCommonLetters((double) countRegexMatches(text, MATCHER_COMMON_LETTERS_COUNT) / object.getTextLength());
+            object.setAvgLeerzeichen((double) countRegexMatches(text, MATCHER_LEERZEICHEN_COUNT) / object.getTextLength());
         });
 
 
