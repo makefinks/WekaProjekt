@@ -30,7 +30,7 @@ public class MainApp {
         writer.writeObjects(objects);
 
 
-        FileParser testParser = new FileParser("traindevtest/dev.arff");
+        FileParser testParser = new FileParser("traindevtest/test.arff");
         ArrayList<DataObject> testObjects = testParser.parseFile();
         AttributeAnalyser testAnalyser = new AttributeAnalyser(testObjects);
         ArffWriter testWriter = new ArffWriter("arffOutputTesting.arff");
